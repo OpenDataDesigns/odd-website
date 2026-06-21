@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How We Work — Open Data Designs</title>
+  <meta name="description" content="Requirements-led architecture, standards-based delivery, and a practice built to transfer capability to your team. How Open Data Designs approaches every engagement.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue:       #002366;
+      --blue-light: #e8f0fe;
+      --gold:       #FFD700;
+      --white:      #ffffff;
+      --gray-50:    #f8fafc;
+      --gray-200:   #e2e8f0;
+      --gray-300:   #cbd5e1;
+      --gray-500:   #64748b;
+      --gray-700:   #334155;
+      --gray-900:   #0f172a;
+      --radius:     12px;
+      --shadow:     0 4px 24px rgba(0,35,102,.10);
+      --shadow-lg:  0 8px 40px rgba(0,35,102,.18);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; color: var(--gray-900); background: var(--white); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+    /* ── Buttons ── */
+    .btn { display: inline-block; padding: .65rem 1.3rem; border-radius: 9px; font-weight: 600; font-size: .9rem; border: 2px solid transparent; cursor: pointer; transition: transform .15s, box-shadow .15s, background .15s, color .15s; white-space: nowrap; }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 18px rgba(0,0,0,.18); }
+    .btn-lg { padding: .85rem 1.75rem; font-size: 1rem; border-radius: 10px; }
+    .btn-gold { background: var(--gold); color: var(--blue); border-color: var(--gold); }
+    .btn-blue { background: var(--blue); color: var(--white); border-color: var(--blue); }
+    .btn-outline-gold { background: transparent; color: var(--gold); border-color: var(--gold); }
+    .btn-outline-gold:hover { background: var(--gold); color: var(--blue); }
+    .btn-outline-blue { background: transparent; color: var(--blue); border-color: var(--blue); }
+    .btn-outline-blue:hover { background: var(--blue); color: var(--white); }
+
+    /* ── Nav ── */
+    nav { position: sticky; top: 0; z-index: 100; background: var(--blue); border-bottom: 2px solid rgba(255,215,0,.2); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 24px; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .nav-logo img { height: 40px; width: 40px; }
+    .nav-logo-text { color: var(--white); font-weight: 700; font-size: 1.05rem; letter-spacing: -.01em; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.78); font-size: .9rem; font-weight: 500; transition: color .15s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+    /* ── Page hero ── */
+    .page-hero { background: var(--blue); padding: 72px 0 64px; }
+    .page-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .page-hero h1 { font-size: 3rem; font-weight: 800; color: var(--white); letter-spacing: -.03em; line-height: 1.1; margin-bottom: 20px; max-width: 640px; }
+    .page-hero-sub { font-size: 1.1rem; color: rgba(255,255,255,.72); line-height: 1.7; max-width: 580px; }
+
+    /* ── Section base ── */
+    section { padding: 88px 0; }
+    .section-label { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+    .section-title { font-size: 2.1rem; font-weight: 800; letter-spacing: -.025em; color: var(--gray-900); margin-bottom: 14px; line-height: 1.2; }
+    .section-sub { font-size: 1rem; color: var(--gray-500); max-width: 600px; line-height: 1.72; }
+    .section-header { margin-bottom: 52px; }
+
+    /* ── Principles ── */
+    .principles-section { background: var(--white); }
+    .principles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px 72px; }
+    .principle { border-top: 2px solid var(--gold); padding-top: 24px; }
+    .principle h3 { font-size: 1.1rem; font-weight: 700; color: var(--gray-900); margin-bottom: 12px; }
+    .principle p { font-size: .95rem; color: var(--gray-500); line-height: 1.72; }
+
+    /* ── Delivery model ── */
+    .delivery-section { background: var(--gray-50); }
+    .delivery-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+    .delivery-body .section-label { color: var(--blue); }
+    .delivery-body p { font-size: .97rem; color: var(--gray-700); line-height: 1.8; margin-bottom: 18px; }
+    .delivery-body p:last-child { margin-bottom: 0; }
+    .delivery-steps { display: flex; flex-direction: column; gap: 16px; }
+    .delivery-step { display: flex; gap: 20px; align-items: flex-start; padding: 20px 24px; background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .delivery-step-num { font-size: 1.25rem; font-weight: 800; color: var(--blue); opacity: .2; line-height: 1; flex-shrink: 0; width: 28px; padding-top: 2px; }
+    .delivery-step-content h4 { font-size: .95rem; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
+    .delivery-step-content p { font-size: .875rem; color: var(--gray-500); line-height: 1.6; margin: 0; }
+
+    /* ── Standards ── */
+    .standards-section { background: var(--blue); }
+    .standards-section .section-label { color: var(--gold); }
+    .standards-section .section-title { color: var(--white); }
+    .standards-section .section-sub { color: rgba(255,255,255,.65); }
+    .standards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .standard-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,215,0,.15); border-radius: var(--radius); padding: 28px; }
+    .standard-card h4 { font-size: .95rem; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
+    .standard-card p { font-size: .875rem; color: rgba(255,255,255,.65); line-height: 1.65; }
+
+    /* ── Tools ── */
+    .tools-section { background: var(--gray-50); }
+    .tools-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .tools-body p { font-size: .97rem; color: var(--gray-700); line-height: 1.8; margin-bottom: 18px; }
+    .tools-body p:last-child { margin-bottom: 0; }
+    .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .tool-chip { background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; padding: 12px 16px; font-size: .875rem; font-weight: 600; color: var(--gray-700); box-shadow: var(--shadow); }
+    .tool-chip span { display: block; font-size: .72rem; font-weight: 400; color: var(--gray-500); margin-top: 2px; }
+
+    /* ── Bridle callout ── */
+    .bridle-callout { background: var(--white); }
+    .bridle-callout-inner { background: var(--blue); border-radius: 20px; padding: 56px 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .bridle-callout h2 { font-size: 1.75rem; font-weight: 800; color: var(--white); letter-spacing: -.02em; line-height: 1.2; margin-bottom: 16px; }
+    .bridle-callout p { font-size: .97rem; color: rgba(255,255,255,.72); line-height: 1.72; margin-bottom: 24px; }
+    .bridle-callout-quote { font-size: 1.05rem; font-style: italic; color: var(--white); line-height: 1.7; border-left: 3px solid var(--gold); padding-left: 20px; }
+    .bridle-callout-attr { margin-top: 16px; font-size: .82rem; color: var(--gold); font-weight: 600; }
+
+    /* ── CTA ── */
+    .cta-section { background: var(--blue); padding: 104px 0; text-align: center; }
+    .cta-section h2 { font-size: 2.5rem; font-weight: 800; color: var(--white); letter-spacing: -.03em; line-height: 1.15; margin-bottom: 16px; max-width: 680px; margin-left: auto; margin-right: auto; }
+    .cta-section p { font-size: 1.05rem; color: rgba(255,255,255,.68); margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.65; }
+    .cta-group { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+    /* ── Footer ── */
+    footer { background: var(--gray-900); padding: 60px 0 32px; }
+    .footer-inner { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 32px; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-brand img { height: 36px; width: 36px; }
+    .footer-brand-name { color: var(--white); font-weight: 700; font-size: .95rem; }
+    .footer-tagline { font-size: .85rem; color: rgba(255,255,255,.4); line-height: 1.6; max-width: 210px; }
+    .footer-col h4 { color: rgba(255,255,255,.45); font-size: .72rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { color: rgba(255,255,255,.6); font-size: .88rem; transition: color .15s; }
+    .footer-col ul a:hover { color: var(--gold); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .footer-copy, .footer-location { font-size: .82rem; color: rgba(255,255,255,.3); }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .principles-grid, .delivery-inner, .tools-inner { grid-template-columns: 1fr; gap: 40px; }
+      .standards-grid { grid-template-columns: 1fr 1fr; }
+      .bridle-callout-inner { grid-template-columns: 1fr; gap: 36px; padding: 40px 36px; }
+      .page-hero h1 { font-size: 2.4rem; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      .page-hero { padding: 56px 0 48px; }
+      .page-hero h1 { font-size: 2rem; }
+      .nav-links { display: none; }
+      .standards-grid { grid-template-columns: 1fr; }
+      .tools-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+      section { padding: 64px 0; }
+      .cta-section h2 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.png" alt="Open Data Designs">
+        <span class="nav-logo-text">Open Data Designs</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="how-we-work.html" class="active">How We Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-gold">Book a Conversation</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Page Hero ── -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-eyebrow">How We Work</div>
+    <h1>Requirements first. Architecture second. Everything else follows.</h1>
+    <p class="page-hero-sub">
+      The approach that produces trusted data platforms is not complicated —
+      but it is disciplined. Understand what is needed before designing anything.
+      Design before building. Document standards so the work outlasts the engagement.
+    </p>
+  </div>
+</section>
+
+<!-- ── Principles ── -->
+<section class="principles-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Principles</div>
+      <h2 class="section-title">What guides every engagement.</h2>
+      <p class="section-sub">These are not values on a wall — they are the specific ways we make decisions when trade-offs come up, which they always do.</p>
+    </div>
+    <div class="principles-grid">
+      <div class="principle">
+        <h3>Requirements lead. Architecture follows.</h3>
+        <p>We do not arrive with a preferred architecture and fit your situation to it. We start by understanding what your organization actually needs — from the people who need it — and design from there. The architecture is the answer to the requirements, not the other way around.</p>
+      </div>
+      <div class="principle">
+        <h3>Understand before recommending.</h3>
+        <p>Every engagement begins with discovery. We interview stakeholders, review systems, and map the current state before we say anything about the future state. Recommendations made without that understanding are guesses dressed up as expertise.</p>
+      </div>
+      <div class="principle">
+        <h3>Standards make work maintainable.</h3>
+        <p>The difference between a platform that lasts and one that becomes a liability is documentation. We establish and follow documented standards on every engagement so that what we build can be operated, extended, and understood by someone who wasn't in the room when it was built.</p>
+      </div>
+      <div class="principle">
+        <h3>The goal is your independence.</h3>
+        <p>A successful engagement ends with your team more capable than when it started. Training, runbooks, and knowledge transfer are not optional extras — they are part of what we deliver. We are not optimizing for the next contract. We are optimizing for your ability to operate without us.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Delivery Model ── -->
+<section class="delivery-section">
+  <div class="container">
+    <div class="delivery-inner">
+      <div class="delivery-body">
+        <div class="section-label">Delivery Model</div>
+        <h2 class="section-title">How the team is assembled.</h2>
+        <p>
+          Darwin leads architecture and strategy on ODD engagements. The development
+          team is assembled to fit the work — your existing staff trained up as the
+          engagement requires, ODD resources, or a combination of both.
+        </p>
+        <p>
+          This model is intentional. Involving your team in the build — not just the
+          handoff — is how real capability transfer happens. People learn by doing,
+          not by watching and receiving documentation afterward.
+        </p>
+        <p>
+          Standards are documented as the work proceeds, so every decision is recorded
+          and the platform remains understandable regardless of who built which part.
+        </p>
+      </div>
+      <div class="delivery-steps">
+        <div class="delivery-step">
+          <div class="delivery-step-num">01</div>
+          <div class="delivery-step-content">
+            <h4>Discovery &amp; Requirements</h4>
+            <p>Stakeholder interviews, system review, current-state mapping. No recommendations until we understand the situation.</p>
+          </div>
+        </div>
+        <div class="delivery-step">
+          <div class="delivery-step-num">02</div>
+          <div class="delivery-step-content">
+            <h4>Architecture &amp; Design</h4>
+            <p>Darwin designs the architecture against the requirements. Modeling approach, platform selection, and integration patterns are decided here — before a line of code is written.</p>
+          </div>
+        </div>
+        <div class="delivery-step">
+          <div class="delivery-step-num">03</div>
+          <div class="delivery-step-content">
+            <h4>Build &amp; Standards</h4>
+            <p>Development proceeds to documented standards. Your team participates where possible — the build is also the training.</p>
+          </div>
+        </div>
+        <div class="delivery-step">
+          <div class="delivery-step-num">04</div>
+          <div class="delivery-step-content">
+            <h4>Enable &amp; Hand Off</h4>
+            <p>Playbooks, runbooks, and hands-on training. The engagement ends when your team can operate and extend the platform without us.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Standards ── -->
+<section class="standards-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">What Standards Mean in Practice</div>
+      <h2 class="section-title" style="color:var(--white)">Consistency is a deliverable.</h2>
+      <p class="section-sub">Standards are not a bureaucratic overhead — they are the mechanism that makes a platform maintainable by anyone, not just the person who built it.</p>
+    </div>
+    <div class="standards-grid">
+      <div class="standard-card">
+        <h4>Naming Conventions</h4>
+        <p>Every object — tables, views, procedures, columns — follows a documented naming pattern. A practitioner who joins the project six months in can navigate the codebase without a guide.</p>
+      </div>
+      <div class="standard-card">
+        <h4>Documented Architecture Decisions</h4>
+        <p>Every significant design choice is written down with its rationale. Why this modeling approach, why this integration pattern, why this exception to the standard. The reasoning is as important as the decision.</p>
+      </div>
+      <div class="standard-card">
+        <h4>Deployment Procedures</h4>
+        <p>Changes move through environments on a documented path. What gets promoted, when, by whom, and how it is validated at each stage. No "it works on my machine" deployments.</p>
+      </div>
+      <div class="standard-card">
+        <h4>Runbooks &amp; Playbooks</h4>
+        <p>Operational procedures written for the people who will run the platform, not the people who built it. Troubleshooting guides, common scenarios, escalation paths.</p>
+      </div>
+      <div class="standard-card">
+        <h4>Data Governance</h4>
+        <p>Ownership, definitions, lineage, and access control documented and enforced. Data governance is not a project — it is a condition of the architecture from the first day.</p>
+      </div>
+      <div class="standard-card">
+        <h4>Version Control &amp; Change Management</h4>
+        <p>All code in version control. Changes tracked, reviewed, and auditable. The history of what changed and why is part of the platform's documentation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Tools ── -->
+<section class="tools-section">
+  <div class="container">
+    <div class="tools-inner">
+      <div class="tools-body">
+        <div class="section-label">Tools &amp; Platforms</div>
+        <h2 class="section-title">We use the right tool for the work.</h2>
+        <p>
+          We are not a single-platform shop. The tools we use on a given engagement
+          are determined by what the work requires, what your team can operate, and
+          what produces the most maintainable result. Platform proficiency is broad
+          by design — a good architecture should not depend on a specific vendor
+          remaining in business or competitive.
+        </p>
+        <p>
+          AI tools are part of our working toolkit — we use them at high proficiency,
+          the same way we use SQL, Python, or any other instrument that makes the
+          work better. They are not a service we offer. They are part of how we work.
+        </p>
+      </div>
+      <div class="tools-grid">
+        <div class="tool-chip">Snowflake<span>Cloud data platform</span></div>
+        <div class="tool-chip">SQL Server<span>On-premise & Azure</span></div>
+        <div class="tool-chip">Python<span>Data engineering & automation</span></div>
+        <div class="tool-chip">dbt<span>Transformation layer</span></div>
+        <div class="tool-chip">Power BI<span>Reporting & visualization</span></div>
+        <div class="tool-chip">Azure / AWS<span>Cloud infrastructure</span></div>
+        <div class="tool-chip">Redshift / BigQuery<span>Cloud warehousing</span></div>
+        <div class="tool-chip">AI tools<span>High-proficiency across leading models</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Bridle Callout ── -->
+<section class="bridle-callout">
+  <div class="container">
+    <div class="bridle-callout-inner">
+      <div>
+        <h2>On AI specifically — we wrote about it.</h2>
+        <p>
+          Darwin spent ten months building a complex multi-layer data platform with AI
+          as a working collaborator and documented the experience honestly — what the
+          governance protocols are, where the tool performs well, where it requires vigilance,
+          and why human judgment remains the most important variable in the system.
+        </p>
+        <a href="the-bridle.html" class="btn btn-gold btn-lg">Read The AI Bridle →</a>
+      </div>
+      <div>
+        <p class="bridle-callout-quote">
+          The highest-leverage use of AI assistance is not code generation —
+          it is consistency enforcement. An AI assistant that has internalized
+          the project's standards and will consistently apply them is a more
+          valuable collaborator than one that can generate clever code but
+          ignores conventions.
+        </p>
+        <div class="bridle-callout-attr">— Darwin Fisk, The AI Bridle</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── */
+<section class="cta-section">
+  <div class="container">
+    <h2>The approach is the differentiator.</h2>
+    <p>Good tools in the hands of an undisciplined process produce inconsistent results. The methodology is what makes the outcomes repeatable.</p>
+    <div class="cta-group">
+      <a href="contact.html" class="btn btn-gold btn-lg">Book a Conversation →</a>
+      <a href="services.html" class="btn btn-outline-gold btn-lg">View Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">
+          <img src="logo.png" alt="Open Data Designs">
+          <span class="footer-brand-name">Open Data Designs</span>
+        </div>
+        <p class="footer-tagline">Trusted Data. Confident Decisions.<br>Phoenix, AZ — serving clients nationally.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Data Foundation Assessment</a></li>
+          <li><a href="services.html">Reporting Modernization</a></li>
+          <li><a href="services.html">Process Optimization</a></li>
+          <li><a href="services.html">Enterprise Data Enablement</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Darwin Fisk</a></li>
+          <li><a href="how-we-work.html">How We Work</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:info@opendatadesigns.com">info@opendatadesigns.com</a></li>
+          <li><a href="tel:+16027345615">602-734-5615</a></li>
+          <li><a href="https://www.linkedin.com/company/open-data-designs" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© <span id="yr"></span> Open Data Designs, LLC. All rights reserved.</span>
+      <span class="footer-location">Phoenix, Arizona</span>
+    </div>
+  </div>
+</footer>
+
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>

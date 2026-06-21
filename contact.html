@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Open Data Designs</title>
+  <meta name="description" content="Start a conversation with Open Data Designs. Darwin Fisk leads every engagement. Let's talk about what your data could do.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue:       #002366;
+      --blue-light: #e8f0fe;
+      --gold:       #FFD700;
+      --white:      #ffffff;
+      --gray-50:    #f8fafc;
+      --gray-200:   #e2e8f0;
+      --gray-300:   #cbd5e1;
+      --gray-500:   #64748b;
+      --gray-700:   #334155;
+      --gray-900:   #0f172a;
+      --radius:     12px;
+      --shadow:     0 4px 24px rgba(0,35,102,.10);
+      --shadow-lg:  0 8px 40px rgba(0,35,102,.18);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; color: var(--gray-900); background: var(--white); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+    /* ── Buttons ── */
+    .btn { display: inline-block; padding: .65rem 1.3rem; border-radius: 9px; font-weight: 600; font-size: .9rem; border: 2px solid transparent; cursor: pointer; transition: transform .15s, box-shadow .15s, background .15s, color .15s; white-space: nowrap; }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 18px rgba(0,0,0,.18); }
+    .btn-lg { padding: .85rem 1.75rem; font-size: 1rem; border-radius: 10px; }
+    .btn-gold { background: var(--gold); color: var(--blue); border-color: var(--gold); }
+    .btn-blue { background: var(--blue); color: var(--white); border-color: var(--blue); }
+    .btn-outline-blue { background: transparent; color: var(--blue); border-color: var(--blue); }
+    .btn-outline-blue:hover { background: var(--blue); color: var(--white); }
+
+    /* ── Nav ── */
+    nav { position: sticky; top: 0; z-index: 100; background: var(--blue); border-bottom: 2px solid rgba(255,215,0,.2); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 24px; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .nav-logo img { height: 40px; width: 40px; }
+    .nav-logo-text { color: var(--white); font-weight: 700; font-size: 1.05rem; letter-spacing: -.01em; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.78); font-size: .9rem; font-weight: 500; transition: color .15s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+    /* ── Page hero ── */
+    .page-hero { background: var(--blue); padding: 72px 0 64px; }
+    .page-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .page-hero h1 { font-size: 3rem; font-weight: 800; color: var(--white); letter-spacing: -.03em; line-height: 1.1; margin-bottom: 20px; max-width: 640px; }
+    .page-hero-sub { font-size: 1.1rem; color: rgba(255,255,255,.72); line-height: 1.7; max-width: 540px; }
+
+    /* ── Contact section ── */
+    .contact-section { padding: 88px 0; background: var(--gray-50); }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; }
+
+    /* ── Left column: contact info ── */
+    .contact-info-block { display: flex; flex-direction: column; gap: 32px; }
+    .contact-item { display: flex; gap: 20px; align-items: flex-start; }
+    .contact-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--blue); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-icon svg { width: 20px; height: 20px; fill: var(--gold); }
+    .contact-item-body h4 { font-size: .88rem; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
+    .contact-item-body a, .contact-item-body p { font-size: .95rem; color: var(--gray-500); line-height: 1.5; }
+    .contact-item-body a:hover { color: var(--blue); }
+
+    .contact-divider { border: none; border-top: 1px solid var(--gray-200); }
+
+    .what-to-expect { padding: 28px 32px; background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .what-to-expect h4 { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; }
+    .expect-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .expect-list li { display: flex; gap: 12px; align-items: flex-start; font-size: .9rem; color: var(--gray-700); line-height: 1.5; }
+    .expect-check { width: 18px; height: 18px; border-radius: 50%; background: var(--blue); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .expect-check svg { width: 10px; height: 10px; stroke: var(--gold); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── Right column: form ── */
+    .contact-form-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 20px; padding: 48px; box-shadow: var(--shadow-lg); }
+    .contact-form-card h2 { font-size: 1.5rem; font-weight: 800; color: var(--gray-900); letter-spacing: -.02em; margin-bottom: 8px; }
+    .contact-form-card p { font-size: .9rem; color: var(--gray-500); margin-bottom: 32px; line-height: 1.65; }
+
+    .form-group { margin-bottom: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    label { display: block; font-size: .82rem; font-weight: 600; color: var(--gray-700); margin-bottom: 6px; letter-spacing: .01em; }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 14px;
+      font-family: inherit;
+      font-size: .92rem;
+      color: var(--gray-900);
+      background: var(--white);
+      border: 1.5px solid var(--gray-300);
+      border-radius: 8px;
+      outline: none;
+      transition: border-color .15s, box-shadow .15s;
+      appearance: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0,35,102,.08);
+    }
+    input::placeholder, textarea::placeholder { color: var(--gray-300); }
+    textarea { resize: vertical; min-height: 120px; }
+    select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+    .form-submit { margin-top: 8px; }
+    .btn-submit { width: 100%; padding: 13px; font-size: 1rem; font-weight: 700; background: var(--blue); color: var(--white); border: 2px solid var(--blue); border-radius: 10px; cursor: pointer; transition: background .15s, transform .15s, box-shadow .15s; }
+    .btn-submit:hover { background: #001a4d; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,35,102,.30); }
+    .form-footnote { font-size: .78rem; color: var(--gray-300); text-align: center; margin-top: 12px; }
+
+    /* ── LinkedIn strip ── */
+    .linkedin-section { background: var(--white); padding: 64px 0; border-top: 1px solid var(--gray-200); }
+    .linkedin-inner { display: flex; gap: 48px; align-items: center; }
+    .linkedin-text { flex: 1; }
+    .linkedin-text h3 { font-size: 1.25rem; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; }
+    .linkedin-text p { font-size: .95rem; color: var(--gray-500); line-height: 1.65; }
+    .linkedin-cta { flex-shrink: 0; }
+
+    /* ── Footer ── */
+    footer { background: var(--gray-900); padding: 60px 0 32px; }
+    .footer-inner { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 32px; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-brand img { height: 36px; width: 36px; }
+    .footer-brand-name { color: var(--white); font-weight: 700; font-size: .95rem; }
+    .footer-tagline { font-size: .85rem; color: rgba(255,255,255,.4); line-height: 1.6; max-width: 210px; }
+    .footer-col h4 { color: rgba(255,255,255,.45); font-size: .72rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { color: rgba(255,255,255,.6); font-size: .88rem; transition: color .15s; }
+    .footer-col ul a:hover { color: var(--gold); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .footer-copy, .footer-location { font-size: .82rem; color: rgba(255,255,255,.3); }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .linkedin-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
+      .page-hero h1 { font-size: 2.4rem; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      .page-hero { padding: 56px 0 48px; }
+      .page-hero h1 { font-size: 2rem; }
+      .nav-links { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form-card { padding: 32px 24px; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.png" alt="Open Data Designs">
+        <span class="nav-logo-text">Open Data Designs</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="how-we-work.html">How We Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-gold">Book a Conversation</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Page Hero ── -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-eyebrow">Get in Touch</div>
+    <h1>Let's talk about your data.</h1>
+    <p class="page-hero-sub">
+      Every engagement starts with a conversation. No sales pitch — just an honest discussion about
+      where your data is, where it needs to go, and whether ODD is the right fit to help you get there.
+    </p>
+  </div>
+</section>
+
+<!-- ── Contact ── -->
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-inner">
+
+      <!-- Left: info + expectations -->
+      <div>
+        <div class="contact-info-block">
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </div>
+            <div class="contact-item-body">
+              <h4>Email</h4>
+              <a href="mailto:info@opendatadesigns.com">info@opendatadesigns.com</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            </div>
+            <div class="contact-item-body">
+              <h4>Phone</h4>
+              <a href="tel:6027345615">602-734-5615</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+            </div>
+            <div class="contact-item-body">
+              <h4>LinkedIn</h4>
+              <a href="https://www.linkedin.com/in/darwinfisk" target="_blank" rel="noopener">linkedin.com/in/darwinfisk</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            </div>
+            <div class="contact-item-body">
+              <h4>Location</h4>
+              <p>Phoenix, AZ &nbsp;·&nbsp; Available for remote and on-site engagements</p>
+            </div>
+          </div>
+
+        </div>
+
+        <hr class="contact-divider" style="margin: 36px 0;">
+
+        <div class="what-to-expect">
+          <h4>What to expect</h4>
+          <ul class="expect-list">
+            <li>
+              <div class="expect-check">
+                <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+              </div>
+              A response within one business day
+            </li>
+            <li>
+              <div class="expect-check">
+                <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+              </div>
+              A direct conversation with Darwin — not a sales team
+            </li>
+            <li>
+              <div class="expect-check">
+                <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+              </div>
+              An honest read on whether ODD is the right fit
+            </li>
+            <li>
+              <div class="expect-check">
+                <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+              </div>
+              No commitment required to have the conversation
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div class="contact-form-card">
+        <h2>Book a Conversation</h2>
+        <p>
+          Tell us a bit about your organization and what you're working on.
+          We'll follow up to schedule a call.
+        </p>
+
+        <form action="mailto:info@opendatadesigns.com" method="post" enctype="text/plain">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="first-name">First Name</label>
+              <input type="text" id="first-name" name="first-name" placeholder="Jane" required>
+            </div>
+            <div class="form-group">
+              <label for="last-name">Last Name</label>
+              <input type="text" id="last-name" name="last-name" placeholder="Smith" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Work Email</label>
+            <input type="email" id="email" name="email" placeholder="jane@yourcompany.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="company">Company / Organization</label>
+            <input type="text" id="company" name="company" placeholder="Acme Corp">
+          </div>
+
+          <div class="form-group">
+            <label for="role">Your Role</label>
+            <select id="role" name="role">
+              <option value="" disabled selected>Select your role</option>
+              <option>CEO / COO / CFO</option>
+              <option>VP / Director of Data or Engineering</option>
+              <option>Data Architect / Engineer</option>
+              <option>CIO / CTO</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="interest">What are you working on?</label>
+            <select id="interest" name="interest">
+              <option value="" disabled selected>Select the closest match</option>
+              <option>Data Management & Reporting Assessment</option>
+              <option>Process & Systems Optimization</option>
+              <option>Enterprise Data Warehouse / Snowflake</option>
+              <option>AI-Augmented Engineering Practice</option>
+              <option>Something else</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">What's the problem you're trying to solve?</label>
+            <textarea id="message" name="message" placeholder="A brief description of the challenge — the more specific, the better."></textarea>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn-submit">Send Message →</button>
+          </div>
+          <p class="form-footnote">We'll respond within one business day.</p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── LinkedIn strip ── -->
+<section class="linkedin-section">
+  <div class="container">
+    <div class="linkedin-inner">
+      <div class="linkedin-text">
+        <h3>Follow the thinking on LinkedIn</h3>
+        <p>
+          Darwin publishes regularly on data architecture, AI-assisted engineering, and what it takes
+          to build platforms that last. If you want to see the work before you reach out, start there.
+        </p>
+      </div>
+      <div class="linkedin-cta">
+        <a href="https://www.linkedin.com/in/darwinfisk" target="_blank" rel="noopener" class="btn btn-blue btn-lg">
+          Connect on LinkedIn →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">
+          <img src="logo.png" alt="Open Data Designs">
+          <span class="footer-brand-name">Open Data Designs</span>
+        </div>
+        <p class="footer-tagline">Trusted Data. Confident Decisions.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Data Management Assessment</a></li>
+          <li><a href="services.html">Process Optimization Analysis</a></li>
+          <li><a href="services.html">Enterprise Data Enablement</a></li>
+          <li><a href="services.html">View All Services</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Darwin Fisk</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="how-we-work.html">How We Work</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:info@opendatadesigns.com">info@opendatadesigns.com</a></li>
+          <li><a href="tel:6027345615">602-734-5615</a></li>
+          <li><a href="https://www.linkedin.com/in/darwinfisk" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Open Data Designs, LLC. All rights reserved.</span>
+      <span class="footer-location">Phoenix, AZ</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

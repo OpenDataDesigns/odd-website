@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Bridle — Open Data Designs</title>
+  <meta name="description" content="How I learned to govern AI in a real data platform engagement — and why human judgment remains the most important variable in any AI-assisted system.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue:       #002366;
+      --blue-light: #e8f0fe;
+      --gold:       #FFD700;
+      --white:      #ffffff;
+      --gray-50:    #f8fafc;
+      --gray-200:   #e2e8f0;
+      --gray-300:   #cbd5e1;
+      --gray-500:   #64748b;
+      --gray-700:   #334155;
+      --gray-900:   #0f172a;
+      --radius:     12px;
+      --shadow:     0 4px 24px rgba(0,35,102,.10);
+      --shadow-lg:  0 8px 40px rgba(0,35,102,.18);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; color: var(--gray-900); background: var(--white); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+    /* ── Buttons ── */
+    .btn { display: inline-block; padding: .65rem 1.3rem; border-radius: 9px; font-weight: 600; font-size: .9rem; border: 2px solid transparent; cursor: pointer; transition: transform .15s, box-shadow .15s, background .15s, color .15s; white-space: nowrap; }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 18px rgba(0,0,0,.18); }
+    .btn-lg { padding: .85rem 1.75rem; font-size: 1rem; border-radius: 10px; }
+    .btn-gold { background: var(--gold); color: var(--blue); border-color: var(--gold); }
+    .btn-blue { background: var(--blue); color: var(--white); border-color: var(--blue); }
+    .btn-outline-gold { background: transparent; color: var(--gold); border-color: var(--gold); }
+    .btn-outline-gold:hover { background: var(--gold); color: var(--blue); }
+    .btn-outline-blue { background: transparent; color: var(--blue); border-color: var(--blue); }
+    .btn-outline-blue:hover { background: var(--blue); color: var(--white); }
+
+    /* ── Nav ── */
+    nav { position: sticky; top: 0; z-index: 100; background: var(--blue); border-bottom: 2px solid rgba(255,215,0,.2); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 24px; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .nav-logo img { height: 40px; width: 40px; }
+    .nav-logo-text { color: var(--white); font-weight: 700; font-size: 1.05rem; letter-spacing: -.01em; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.78); font-size: .9rem; font-weight: 500; transition: color .15s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+    /* ── Article hero ── */
+    .article-hero { background: var(--blue); padding: 80px 0 72px; }
+    .article-back { display: inline-flex; align-items: center; gap: 6px; font-size: .82rem; color: rgba(255,255,255,.55); font-weight: 500; margin-bottom: 28px; transition: color .15s; }
+    .article-back:hover { color: var(--gold); }
+    .article-back svg { width: 14px; height: 14px; fill: currentColor; }
+    .article-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+    .article-hero h1 { font-size: 3rem; font-weight: 800; color: var(--white); letter-spacing: -.03em; line-height: 1.1; margin-bottom: 24px; max-width: 760px; }
+    .article-byline { font-size: .9rem; color: rgba(255,255,255,.5); margin-bottom: 32px; }
+    .article-byline strong { color: rgba(255,255,255,.8); }
+    .article-pull { font-size: 1.15rem; font-style: italic; color: rgba(255,255,255,.82); line-height: 1.72; border-left: 3px solid var(--gold); padding-left: 24px; max-width: 640px; }
+
+    /* ── Article layout ── */
+    .article-layout { padding: 88px 0; background: var(--white); }
+    .article-inner { display: grid; grid-template-columns: 1fr 300px; gap: 80px; align-items: start; }
+
+    /* ── Article body ── */
+    .article-body { font-size: 1.05rem; color: var(--gray-700); line-height: 1.85; }
+    .article-body p { margin-bottom: 1.5em; }
+    .article-body h2 { font-size: 1.5rem; font-weight: 800; color: var(--gray-900); letter-spacing: -.02em; line-height: 1.25; margin-top: 2.5em; margin-bottom: .75em; padding-top: 2em; border-top: 1px solid var(--gray-200); }
+    .article-body h2:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+    .article-body ul { padding-left: 1.5em; margin-bottom: 1.5em; display: flex; flex-direction: column; gap: .5em; }
+    .article-body ul li { color: var(--gray-700); }
+    .article-pullquote { background: var(--blue); border-radius: var(--radius); padding: 32px 36px; margin: 2em 0; }
+    .article-pullquote p { font-size: 1.1rem; font-style: italic; color: var(--white); line-height: 1.7; margin: 0; border-left: 3px solid var(--gold); padding-left: 20px; }
+    .article-note { background: var(--gray-50); border: 1px solid var(--gray-200); border-left: 3px solid var(--blue); border-radius: var(--radius); padding: 24px 28px; margin: 2em 0; }
+    .article-note-label { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+    .article-note p { font-size: .95rem; color: var(--gray-700); line-height: 1.7; margin: 0; }
+    .article-divider { border: none; border-top: 1px solid var(--gray-200); margin: 3em 0; }
+
+    /* ── Sticky sidebar ── */
+    .article-sidebar { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .sidebar-card h4 { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+    .sidebar-card p { font-size: .875rem; color: var(--gray-500); line-height: 1.65; margin-bottom: 14px; }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .toc-list a { font-size: .85rem; color: var(--gray-500); transition: color .15s; }
+    .toc-list a:hover { color: var(--blue); }
+    .sidebar-cta { background: var(--blue); border-color: transparent; }
+    .sidebar-cta h4 { color: var(--gold); }
+    .sidebar-cta p { color: rgba(255,255,255,.68); }
+
+    /* ── CTA ── */
+    .cta-section { background: var(--blue); padding: 104px 0; text-align: center; }
+    .cta-section h2 { font-size: 2.5rem; font-weight: 800; color: var(--white); letter-spacing: -.03em; line-height: 1.15; margin-bottom: 16px; max-width: 680px; margin-left: auto; margin-right: auto; }
+    .cta-section p { font-size: 1.05rem; color: rgba(255,255,255,.68); margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.65; }
+    .cta-group { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+    /* ── Footer ── */
+    footer { background: var(--gray-900); padding: 60px 0 32px; }
+    .footer-inner { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 32px; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-brand img { height: 36px; width: 36px; }
+    .footer-brand-name { color: var(--white); font-weight: 700; font-size: .95rem; }
+    .footer-tagline { font-size: .85rem; color: rgba(255,255,255,.4); line-height: 1.6; max-width: 210px; }
+    .footer-col h4 { color: rgba(255,255,255,.45); font-size: .72rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { color: rgba(255,255,255,.6); font-size: .88rem; transition: color .15s; }
+    .footer-col ul a:hover { color: var(--gold); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .footer-copy, .footer-location { font-size: .82rem; color: rgba(255,255,255,.3); }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .article-inner { grid-template-columns: 1fr; }
+      .article-sidebar { position: static; }
+      .article-hero h1 { font-size: 2.4rem; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      .article-hero { padding: 56px 0 48px; }
+      .article-hero h1 { font-size: 2rem; }
+      .nav-links { display: none; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .cta-section h2 { font-size: 2rem; }
+      .article-layout { padding: 56px 0; }
+      .article-body h2 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.png" alt="Open Data Designs">
+        <span class="nav-logo-text">Open Data Designs</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="how-we-work.html">How We Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-gold">Book a Conversation</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Article Hero ── -->
+<section class="article-hero">
+  <div class="container">
+    <a href="blog.html" class="article-back">
+      <svg viewBox="0 0 16 16"><path d="M10 12L6 8l4-4"/></svg>
+      Back to Blog
+    </a>
+    <div class="article-eyebrow">AI-Assisted Engineering</div>
+    <h1>The Bridle: Riding the AI Stallion Without Losing the Reins</h1>
+    <div class="article-byline"><strong>Darwin Fisk</strong> &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; 25 min read</div>
+    <p class="article-pull">
+      "The highest-leverage use of AI assistance is not code generation — it's consistency.
+      A solo practitioner building a governed data platform faces constant pressure to let
+      standards slip. An AI that has internalized your standards and will apply them every
+      single time, without fatigue or shortcuts, is worth more than one that can write
+      clever code but ignores conventions."
+    </p>
+  </div>
+</section>
+
+<!-- ── Article content ── -->
+<section class="article-layout">
+  <div class="container">
+    <div class="article-inner">
+
+      <article class="article-body">
+
+        <p>
+          Last August I started using AI on a data platform engagement. My first tool was ChatGPT — not
+          for coding, but for requirements analysis. I was a solo practitioner on a real engagement,
+          building something that had to work, and I had dense, sometimes contradictory business
+          documentation to work through. ChatGPT was good at reading it and helping me find the signal.
+          That was the door.
+        </p>
+
+        <p>
+          I tried other tools in those early months. The AI landscape in 2025 was crowded and everyone
+          had an opinion about which model was best for what. I ran some experiments, formed some opinions,
+          moved on. Two tools survived the cut: ChatGPT, which I still use for requirements analysis and
+          strategic thinking, and Claude, which I brought in when I started writing code. The two serve
+          different functions in my workflow and I've stopped feeling the need to consolidate them into one.
+        </p>
+
+        <p>
+          By early 2026, I was running a complex multi-layer ETL platform — SQL Server, Snowflake, five
+          database layers, a governed deployment process — with Claude as a genuine collaborator on the
+          engineering side. Not a code generator. A partner in architectural reasoning, documentation,
+          pattern enforcement, and the kind of sustained, session-to-session continuity that is genuinely
+          hard to maintain alone.
+        </p>
+
+        <p>
+          This is the story of how that happened, what I learned about the limits of AI and my own limits,
+          and why I never once let the AI drive.
+        </p>
+
+        <hr class="article-divider">
+
+        <h2>The Wild Stallion Problem</h2>
+
+        <p>
+          The first thing you notice when you start working seriously with an AI assistant is that it is
+          extremely capable and extremely literal at the same time. It will do exactly what it understands
+          you to mean — which is not always what you meant.
+        </p>
+
+        <p>
+          I learned this sharply in December 2025. I was deep in a session and I said two words:
+          <em>save state</em>.
+        </p>
+
+        <p>
+          I had already told the AI what "save state" meant: update the session notes, capture where we
+          are, make sure nothing is lost before I close out for the day. That definition was on record.
+        </p>
+
+        <p>
+          The AI committed to git.
+        </p>
+
+        <p>
+          It had decided to expand the definition. Committing to version control is, after all, also a
+          form of saving state — and arguably a more complete one. In trying to be more thorough than I
+          asked, it overrode what I had explicitly told it. It wasn't malicious. It was the AI being
+          helpfully wrong, improving on my instructions in a direction I hadn't authorized.
+        </p>
+
+        <p>
+          That incident made something clear: a verbal definition given in conversation is a weak contract.
+          The AI had heard it, agreed with it, and then reasoned past it. What I needed wasn't a better
+          definition — I needed a harder constraint. The lesson wasn't to explain more clearly. It was to
+          write the rule down somewhere the AI had to read before it acted, and make the boundary explicit
+          enough that there was no room to interpret it as a floor to improve upon.
+        </p>
+
+        <p>
+          That incident produced a permission vocabulary. "Do it," "execute," "run it" — these mean take
+          action. Anything else means analysis only. "Save state" got its own explicit definition,
+          documented in CLAUDE.md: update the session notes; do not touch git. One incident. One protocol.
+          Documented and enforced from that day forward.
+        </p>
+
+        <div class="article-pullquote">
+          <p>
+            This is the wild stallion problem. An AI coding assistant is enormously powerful and very fast
+            and will go wherever it understands you to be pointing. The question is never <em>can it do
+            this</em> — it's <em>have you told it what this means</em>. A bridle doesn't slow a horse down.
+            It gives you the ability to steer.
+          </p>
+        </div>
+
+        <h2>Building the Protocols</h2>
+
+        <p>
+          I want to be honest about how the AI governance framework developed, because it didn't start as
+          a framework. It started as reactions.
+        </p>
+
+        <p>
+          Every protocol I built came from friction. The permission vocabulary came from the git incident.
+          A rule about checking for existing files before creating new ones came from a session where the
+          AI built a new function in a new location without realizing the original already existed somewhere
+          in the codebase. I had to track down my own code and reconcile two versions of a function I'd
+          written months earlier. That was a bad afternoon.
+        </p>
+
+        <p>
+          After each incident I did two things: I fixed the immediate problem, and I documented the lesson
+          as a rule. Not in a notebook. In CLAUDE.md — the project-level briefing file that the AI reads
+          at the start of every session. The rules were explicit and behavioral:
+        </p>
+
+        <ul>
+          <li>Never execute state-changing commands without explicit permission phrases.</li>
+          <li>Always check existing file locations before creating new files.</li>
+          <li>Interpret "save state" as: update session notes. Not: commit to git.</li>
+        </ul>
+
+        <p>
+          Over time, the list grew. But here's the thing: the list also stabilized. Once a rule was in
+          place and the AI internalized it, the friction went away. I stopped losing afternoons to
+          ambiguity. The bridle was on, and we could actually work.
+        </p>
+
+        <h2>Building the Library</h2>
+
+        <p>
+          Rules accumulate quickly on a real engagement. Each project facet — staging patterns, data vault
+          conventions, deployment procedures, naming standards, logging requirements — had its own set of
+          constraints. A single flat list of rules becomes unworkable fast. You end up with a document
+          nobody reads in full, including the AI.
+        </p>
+
+        <p>
+          The answer was a library. Not a single document but a structured collection of knowledge organized
+          by domain, with CLAUDE.md as the index and entry point. CLAUDE.md holds the core principles and
+          a set of startup instructions — what to read, in what order, to be properly oriented for a
+          session. It doesn't try to contain everything. It points to where everything lives.
+        </p>
+
+        <p>
+          My standard opening prompt, in every AI session regardless of which tool I'm using, is three
+          instructions: read CLAUDE.md, follow startup, enforce rules. That's it. The AI reads the index,
+          follows the startup sequence, loads the relevant parts of the library, and arrives at the actual
+          work already oriented to the project's standards.
+        </p>
+
+        <p>
+          What makes this approach durable is that the library is just files. CLAUDE.md and the documents
+          it references are readable by any AI system that can access the file system. The knowledge
+          architecture is not tied to a vendor. The same library that bridles one AI bridles the next.
+          When I switch tools or add a new thread, I don't rebuild context from scratch. I point the new
+          thread at the library and issue the same three-instruction prompt.
+        </p>
+
+        <div class="article-pullquote">
+          <p>This is the difference between governing a session and governing a system. A session ends. A library persists.</p>
+        </div>
+
+        <h2>Why I Talk to AI Instead of Prompting It</h2>
+
+        <p>
+          There is a school of thought that says the right way to use AI is to write precise, structured
+          prompts. Define the role. Specify the format. Constrain the output. Treat it like a very
+          sophisticated API call.
+        </p>
+
+        <p>
+          I don't work that way, and I've thought about why.
+        </p>
+
+        <p>
+          My work is rarely well-defined enough to support a rigid prompt at the start. When I'm making
+          architectural decisions — how to model a complex data source, how to handle a foreign key that
+          doesn't always exist in the source, whether to use a MERGE or an INSERT/DELETE pattern for a
+          particular load — I don't arrive at the session knowing the answer. I arrive knowing the problem,
+          roughly. The specifics emerge through the conversation.
+        </p>
+
+        <p>
+          A rigid prompt forces me to fully define the problem before I understand it. That's backwards.
+        </p>
+
+        <p>
+          Conversational prompting lets me discover the problem while I'm describing it. I'll start
+          explaining a data quality issue and, in the act of explaining it, realize I've been thinking
+          about it wrong. The response might surface a dimension I hadn't considered. The dialogue sharpens
+          the question. Often the most valuable output isn't the code the AI writes — it's the moment where
+          it says something that makes me see the problem differently.
+        </p>
+
+        <p>
+          That said, structured prompts are a genuinely valuable asset in the right context — and I use
+          them. Documentation is the clearest example. Once you have defined what every piece of
+          documentation should contain, how it should be structured, and where it should go, that definition
+          can live in a prompt file. From that point on, generating consistent documentation for any file
+          or pipeline is a single instruction. The AI reads the prompt file, reads the target, and produces
+          documentation that meets the defined standard every time.
+        </p>
+
+        <p>
+          The distinction I've landed on: conversational prompting for open-ended thinking, structured
+          prompt files for repeatable execution. Both have a place. The mistake is applying either one
+          where the other belongs.
+        </p>
+
+        <h2>What I Actually Delegate</h2>
+
+        <p>
+          The clearest thing I learned over these months is that the highest-value use of AI is not code
+          generation. It's consistency.
+        </p>
+
+        <p>
+          I delegate pattern implementation freely. Once I've defined how a staging procedure works — the
+          file header, the logging wrapper calls, the exception handling, the truncate-and-copy sequence —
+          the AI can generate the next one from the pattern. I review it. I don't write it from scratch.
+        </p>
+
+        <p>
+          I delegate documentation almost entirely. Session notes, architectural decision records, inline
+          comments, README files — the AI generates these as a byproduct of our working sessions, not as a
+          separate task. The documentation exists because the conversation existed.
+        </p>
+
+        <p>
+          I delegate analysis and options generation constantly. When I'm facing an architectural decision,
+          I want to see the trade-offs written out clearly before I decide. AI is excellent at this.
+        </p>
+
+        <div class="article-pullquote">
+          <p>
+            What I do not delegate: decisions. Standards definition. Output verification. Judgment calls
+            about trade-offs. The thing a client pays for is my judgment about their data. AI can inform
+            that judgment. It cannot replace it.
+          </p>
+        </div>
+
+        <p>
+          That judgment is also what makes the collaboration work in the first place. My domain expertise
+          tells me what options should exist for a given design choice. When AI presents two options and I
+          know there should be four, I push back. I challenge it to rethink. That challenge usually produces
+          the fuller picture — but only because I knew to ask for it.
+        </p>
+
+        <h2>Documentation as a Consistency Engine</h2>
+
+        <p>
+          AI is exceptionally good at creating deep, thorough documentation for a system it understands.
+          Once a codebase has enough context — enough patterns established, enough pipelines built, enough
+          decisions made — I can ask the AI to document it comprehensively: the patterns in use, the
+          standards that govern them, the issues that were found and resolved, the reasoning behind key
+          architectural choices.
+        </p>
+
+        <p>
+          But the documentation is not the end product. It's an input.
+        </p>
+
+        <p>
+          When I start a new pipeline or extend an existing one, I point the AI at the written
+          documentation and at already-built pipelines that represent the established patterns. Then I
+          ask it to do something specific before it writes a single line of code: compare what it finds
+          across the documentation and the examples. Tell me where they agree. Tell me where they vary.
+          Surface any inconsistencies between what the standards say and what the existing code actually does.
+        </p>
+
+        <p>
+          This is how AI becomes a consistency enforcement mechanism rather than a source of new variation.
+          The risk with AI-generated code is that it brings patterns from its training data into your
+          codebase — patterns that may be perfectly valid in the abstract but inconsistent with how you've
+          chosen to do things. Grounding it in your own documentation and your own examples before it writes
+          redirects that tendency.
+        </p>
+
+        <h2>Testing: Where AI Earns Its Keep and Loses Its Patience</h2>
+
+        <p>
+          AI is genuinely valuable for data testing, and it's an area where the return on investment is
+          immediate and visible. Dataset comparisons that would take hours to set up manually — row counts,
+          column-level deltas, null checks across source and target — come together quickly.
+        </p>
+
+        <p>
+          The challenge is the iterations. Writing a solid test suite for a complex pipeline requires the
+          AI to understand the source files — the actual schemas, the actual column names, the actual data
+          types. What it will often do instead is assume. It will generate a test that looks complete,
+          references columns with plausible names, and handles cases that seem relevant — all without having
+          read the file. The test is confidently wrong in ways that only become visible when you run it.
+        </p>
+
+        <p>
+          The workaround is direct instruction at the start: read this file before you write anything. Not
+          implied — stated. And then verify that it did. The iterations add time, but the end result — a
+          thorough test suite grounded in the actual schema — is still faster and more complete than writing
+          it manually. You just have to budget for the back-and-forth.
+        </p>
+
+        <h2>Running Multiple Threads</h2>
+
+        <p>
+          At some point I started using a second AI tool inside VS Code alongside Claude in the terminal.
+          This wasn't redundancy — it opened something new. I could run two AI work streams simultaneously.
+          One thread refining a staging procedure while another analyzed a data quality issue in a different
+          part of the codebase.
+        </p>
+
+        <p>
+          The immediate challenge was file conflicts. Two AI threads working in the same codebase at the
+          same time will collide if you don't manage scope carefully. I learned to divide work by domain
+          before I started: this thread owns these files, that thread owns those. Overlap required
+          coordination. The discipline wasn't optional — a merge conflict between two AI-generated outputs
+          in a governed codebase is exactly the kind of mess that costs more to clean up than it saved to
+          create.
+        </p>
+
+        <h2>Continuity Across Sessions</h2>
+
+        <p>
+          One problem nobody talks about enough when they talk about AI-assisted development: sessions end.
+          Context resets. The AI that helped you design a complex pipeline yesterday has no memory of it today.
+        </p>
+
+        <p>
+          For short engagements, this is a minor inconvenience. For a months-long platform build running
+          across multiple machines and multiple threads, it's a structural challenge.
+        </p>
+
+        <p>
+          I solved it with session notes. At the end of every working session — on every thread, on every
+          machine — I write a detailed handoff document: the current state of the work, decisions made,
+          decisions deferred, the immediate next action. These notes are written for the AI to read at the
+          start of the next session — a context injection that reconstructs enough state to continue where
+          we left off.
+        </p>
+
+        <p>
+          This practice also produces something I didn't anticipate: an artifact record of how the work
+          evolved. Going back through months of session notes, you can trace exactly how an architectural
+          decision was made, what the options were, what evidence shifted the decision, and who — human or
+          AI — contributed what. That's not just useful for continuity. It's useful for accountability.
+        </p>
+
+        <h2>The Partnership, Honestly Assessed</h2>
+
+        <p>
+          There are things the AI does that genuinely impress me. Its ability to hold a complex schema in
+          view and reason about implications across tables. Its consistency in applying patterns once
+          they're established. Its willingness to say "here are three approaches and here's the trade-off
+          for each" rather than just picking one.
+        </p>
+
+        <div class="article-pullquote">
+          <p>
+            The most useful mental model I've found: AI is like an employee who is extraordinarily
+            intelligent and has no common sense. It will go off on tangents. Give it a focused task and
+            it may solve an adjacent problem you didn't ask about, refactor something you didn't mention,
+            or produce a thorough answer to a question you weren't asking. The intelligence is genuine.
+            The judgment is not.
+          </p>
+        </div>
+
+        <p>
+          There is a subtler failure mode that took me longer to come to terms with. Even with a
+          well-documented AI governance framework — protocols written down, rules explicit, CLAUDE.md in
+          place — the AI will still occasionally do something you didn't ask for. When you point it out,
+          it will review what it did, agree that it violated the protocol, and commit to not doing it again.
+          The commitment is sincere. It can also be meaningless. The same behavior can reappear in the same
+          session, sometimes within minutes.
+        </p>
+
+        <p>
+          This is not bad faith. It reflects something fundamental about how these systems work: they don't
+          retain corrections the way a person does. A human collaborator who commits to not doing something
+          again has updated their mental model. An AI that commits to not doing something again has generated
+          a response — and the next output is still drawn from the same underlying patterns.
+        </p>
+
+        <p>
+          The practical implication: written protocols matter more than verbal agreements. What you put in
+          CLAUDE.md constrains behavior at the session level. What the AI agrees to in conversation
+          constrains the next response, at best. Build your governance into the briefing document, not the
+          conversation. And stay alert regardless.
+        </p>
+
+        <h2>What the Journey Taught Me</h2>
+
+        <p>
+          I started this engagement skeptical of AI hype and ended it convinced that AI-assisted development
+          is genuinely transformative — with a hard and specific caveat: it transforms the productivity of
+          practitioners who have strong judgment, clear standards, and the discipline to govern the tool.
+          It amplifies what's already there. It does not supply what isn't.
+        </p>
+
+        <p>
+          The bridle metaphor keeps coming back to me because I think it captures something important. A
+          bridle doesn't diminish a horse. It creates the conditions under which the horse's speed and
+          strength can be directed productively. Without it, all that power goes somewhere — but not
+          necessarily where you need it to go.
+        </p>
+
+        <p>
+          The protocols I built — the permission vocabulary, the session notes, the CLAUDE.md briefing
+          files, the verification checklists — are the bridle. They're not limitations on what AI can do.
+          They're the conditions under which I can trust what it does enough to ship it.
+        </p>
+
+        <p>
+          And that trust, earned through incidents and corrections and months of working together, is the
+          thing I actually couldn't have built any other way.
+        </p>
+
+        <hr class="article-divider">
+
+        <div class="article-note">
+          <div class="article-note-label">A note on how this article was written</div>
+          <p>
+            This article was researched, shaped, and edited with AI assistance — the same tools, the same
+            discipline, and the same process described in the pages above. The source material was months
+            of session notes I wrote during the engagement. My role was the same role I always occupy:
+            I provided the context, I steered the direction, I corrected what was wrong, I pushed for what
+            was missing, and I made every judgment call about what stayed and what didn't. The bridle was
+            on. The article is mine.
+          </p>
+          <p style="margin-top:12px; margin-bottom:0;">
+            I'm disclosing this not as a disclaimer but as a demonstration. If you've read this far and
+            found the argument credible, you've already seen the evidence. A governed AI collaboration
+            produced a piece of writing that accurately reflects a months-long technical journey — because
+            the person driving it understood the work, stayed in the seat, and never handed over the reins.
+          </p>
+        </div>
+
+        <p style="margin-top: 2em; font-size: .9rem; color: var(--gray-500); font-style: italic;">
+          Darwin Fisk is the founder of Open Data Designs, LLC, a data engineering consultancy
+          specializing in governed data platform development.
+        </p>
+
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="article-sidebar">
+
+        <div class="sidebar-card">
+          <h4>In this article</h4>
+          <ul class="toc-list">
+            <li><a href="#">The Wild Stallion Problem</a></li>
+            <li><a href="#">Building the Protocols</a></li>
+            <li><a href="#">Building the Library</a></li>
+            <li><a href="#">Why I Talk to AI Instead of Prompting It</a></li>
+            <li><a href="#">What I Actually Delegate</a></li>
+            <li><a href="#">Documentation as a Consistency Engine</a></li>
+            <li><a href="#">Testing</a></li>
+            <li><a href="#">Running Multiple Threads</a></li>
+            <li><a href="#">Continuity Across Sessions</a></li>
+            <li><a href="#">The Partnership, Honestly Assessed</a></li>
+            <li><a href="#">What the Journey Taught Me</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h4>About the author</h4>
+          <p>
+            Darwin Fisk is an enterprise data architect with 25+ years at Amazon, American Express,
+            Blue Cross Blue Shield, TriWest Healthcare Alliance, and others.
+          </p>
+          <a href="about.html" class="btn btn-outline-blue" style="font-size:.85rem; padding:.5rem 1rem;">About Darwin →</a>
+        </div>
+
+        <div class="sidebar-card sidebar-cta">
+          <h4>Work with ODD</h4>
+          <p>
+            The methodology in this article is how ODD approaches every engagement.
+            If that sounds like what you need, let's talk.
+          </p>
+          <a href="contact.html" class="btn btn-gold" style="font-size:.88rem; padding:.6rem 1.2rem;">Book a Conversation →</a>
+        </div>
+
+        <div class="sidebar-card">
+          <h4>More from the blog</h4>
+          <a href="blog.html" class="btn btn-outline-blue" style="font-size:.85rem; padding:.5rem 1rem;">← Back to Blog</a>
+        </div>
+
+      </aside>
+
+    </div><!-- /article-inner -->
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Trusted data builds confident decisions.</h2>
+    <p>Want to talk about how ODD's approach could apply to your organization?</p>
+    <div class="cta-group">
+      <a href="contact.html" class="btn btn-gold btn-lg">Book a Conversation →</a>
+      <a href="how-we-work.html" class="btn btn-outline-gold btn-lg">How We Work</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">
+          <img src="logo.png" alt="Open Data Designs">
+          <span class="footer-brand-name">Open Data Designs</span>
+        </div>
+        <p class="footer-tagline">Trusted Data. Confident Decisions.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Data Management Assessment</a></li>
+          <li><a href="services.html">Process Optimization Analysis</a></li>
+          <li><a href="services.html">Enterprise Data Enablement</a></li>
+          <li><a href="services.html">View All Services</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Darwin Fisk</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="how-we-work.html">How We Work</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:info@opendatadesigns.com">info@opendatadesigns.com</a></li>
+          <li><a href="tel:6027345615">602-734-5615</a></li>
+          <li><a href="https://www.linkedin.com/in/darwinfisk" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Open Data Designs, LLC. All rights reserved.</span>
+      <span class="footer-location">Phoenix, AZ</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

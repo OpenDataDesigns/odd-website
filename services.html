@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services — Open Data Designs</title>
+  <meta name="description" content="Data architecture, assessment, reporting modernization, process optimization, and enterprise data enablement. ODD engagements are scoped to match your situation — not a predetermined package.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue:       #002366;
+      --blue-mid:   #0a3580;
+      --blue-light: #e8f0fe;
+      --gold:       #FFD700;
+      --white:      #ffffff;
+      --gray-50:    #f8fafc;
+      --gray-100:   #f1f5f9;
+      --gray-200:   #e2e8f0;
+      --gray-300:   #cbd5e1;
+      --gray-500:   #64748b;
+      --gray-700:   #334155;
+      --gray-900:   #0f172a;
+      --radius:     12px;
+      --shadow:     0 4px 24px rgba(0,35,102,.10);
+      --shadow-lg:  0 8px 40px rgba(0,35,102,.18);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; color: var(--gray-900); background: var(--white); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+    /* ── Buttons ── */
+    .btn { display: inline-block; padding: .65rem 1.3rem; border-radius: 9px; font-weight: 600; font-size: .9rem; border: 2px solid transparent; cursor: pointer; transition: transform .15s, box-shadow .15s, background .15s, color .15s; white-space: nowrap; }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 18px rgba(0,0,0,.18); }
+    .btn-lg { padding: .85rem 1.75rem; font-size: 1rem; border-radius: 10px; }
+    .btn-gold { background: var(--gold); color: var(--blue); border-color: var(--gold); }
+    .btn-outline-gold { background: transparent; color: var(--gold); border-color: var(--gold); }
+    .btn-outline-gold:hover { background: var(--gold); color: var(--blue); }
+    .btn-outline-blue { background: transparent; color: var(--blue); border-color: var(--blue); }
+    .btn-outline-blue:hover { background: var(--blue); color: var(--white); }
+    .btn-white { background: var(--white); color: var(--blue); border-color: var(--white); }
+
+    /* ── Nav ── */
+    nav { position: sticky; top: 0; z-index: 100; background: var(--blue); border-bottom: 2px solid rgba(255,215,0,.2); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 24px; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .nav-logo img { height: 40px; width: 40px; }
+    .nav-logo-text { color: var(--white); font-weight: 700; font-size: 1.05rem; letter-spacing: -.01em; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.78); font-size: .9rem; font-weight: 500; transition: color .15s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+    /* ── Page hero ── */
+    .page-hero { background: var(--blue); padding: 72px 0 64px; }
+    .page-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .page-hero h1 { font-size: 3rem; font-weight: 800; color: var(--white); letter-spacing: -.03em; line-height: 1.1; margin-bottom: 20px; max-width: 640px; }
+    .page-hero h1 span { color: var(--gold); }
+    .page-hero-sub { font-size: 1.1rem; color: rgba(255,255,255,.72); line-height: 1.7; max-width: 580px; }
+
+    /* ── Section base ── */
+    section { padding: 88px 0; }
+    .section-label { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+    .section-title { font-size: 2.1rem; font-weight: 800; letter-spacing: -.025em; color: var(--gray-900); margin-bottom: 14px; line-height: 1.2; }
+    .section-sub { font-size: 1rem; color: var(--gray-500); max-width: 600px; line-height: 1.72; }
+    .section-header { margin-bottom: 52px; }
+
+    /* ── Entry points ── */
+    .entry-section { background: var(--gray-50); }
+    .entry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .entry-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: 16px; padding: 40px 36px;
+      box-shadow: var(--shadow);
+      display: flex; flex-direction: column;
+    }
+    .entry-card-num { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); background: var(--blue); display: inline-block; padding: .3rem .7rem; border-radius: 999px; margin-bottom: 20px; align-self: flex-start; }
+    .entry-card h3 { font-size: 1.4rem; font-weight: 800; color: var(--gray-900); margin-bottom: 8px; letter-spacing: -.02em; line-height: 1.2; }
+    .entry-tagline { font-size: .95rem; font-style: italic; color: var(--blue); font-weight: 500; margin-bottom: 20px; }
+    .entry-card p { font-size: .95rem; color: var(--gray-500); line-height: 1.7; margin-bottom: 24px; }
+    .entry-triggers { margin-bottom: 24px; }
+    .entry-triggers-label { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 10px; }
+    .trigger-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .trigger-list li { font-size: .9rem; color: var(--gray-700); font-style: italic; padding-left: 20px; position: relative; }
+    .trigger-list li::before { content: '"'; position: absolute; left: 0; color: var(--blue); font-weight: 700; font-style: normal; }
+    .entry-deliverable { margin-top: auto; padding: 16px 18px; background: var(--blue-light); border-radius: 8px; }
+    .entry-deliverable-label { font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); margin-bottom: 4px; }
+    .entry-deliverable p { font-size: .88rem; color: var(--blue); font-weight: 600; margin: 0; }
+
+    /* ── Catalog ── */
+    .catalog-section { background: var(--white); }
+    .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .catalog-card { border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; transition: transform .2s, box-shadow .2s; }
+    .catalog-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .catalog-card-header { padding: 24px 28px 20px; background: var(--gray-50); border-bottom: 1px solid var(--gray-200); }
+    .catalog-card-header h3 { font-size: 1.05rem; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
+    .catalog-card-header p { font-size: .88rem; color: var(--gray-500); line-height: 1.55; }
+    .catalog-card-body { padding: 24px 28px; }
+    .catalog-what-label { font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 12px; }
+    .catalog-what { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .catalog-what li { display: flex; align-items: flex-start; gap: 10px; font-size: .875rem; color: var(--gray-700); line-height: 1.5; }
+    .catalog-bullet { width: 18px; height: 18px; min-width: 18px; border-radius: 50%; background: var(--blue-light); display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+    .catalog-bullet svg { width: 9px; height: 9px; color: var(--blue); }
+    .catalog-benefit { padding: 14px 16px; background: rgba(0,35,102,.04); border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0; }
+    .catalog-benefit-label { font-size: .68rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--blue); margin-bottom: 4px; }
+    .catalog-benefit p { font-size: .855rem; color: var(--gray-700); line-height: 1.6; margin: 0; }
+
+    /* ── How it works ── */
+    .how-section { background: var(--blue); }
+    .how-section .section-label { color: var(--gold); }
+    .how-section .section-title { color: var(--white); }
+    .how-section .section-sub { color: rgba(255,255,255,.65); }
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .step-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,215,0,.15); border-radius: var(--radius); padding: 32px 28px; }
+    .step-num { font-size: 2.5rem; font-weight: 800; color: var(--gold); opacity: .25; line-height: 1; margin-bottom: 16px; }
+    .step-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+    .step-card p { font-size: .9rem; color: rgba(255,255,255,.65); line-height: 1.65; }
+
+    /* ── Who we serve ── */
+    .who-section { background: var(--gray-50); }
+    .who-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .who-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 28px 24px; box-shadow: var(--shadow); }
+    .who-icon { font-size: 1.75rem; margin-bottom: 14px; }
+    .who-card h4 { font-size: .95rem; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; }
+    .who-card p { font-size: .875rem; color: var(--gray-500); line-height: 1.6; }
+
+    /* ── CTA ── */
+    .cta-section { background: var(--blue); padding: 104px 0; text-align: center; }
+    .cta-section h2 { font-size: 2.5rem; font-weight: 800; color: var(--white); letter-spacing: -.03em; line-height: 1.15; margin-bottom: 16px; max-width: 680px; margin-left: auto; margin-right: auto; }
+    .cta-section p { font-size: 1.05rem; color: rgba(255,255,255,.68); margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.65; }
+    .cta-group { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+    /* ── Footer ── */
+    footer { background: var(--gray-900); padding: 60px 0 32px; }
+    .footer-inner { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 32px; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-brand img { height: 36px; width: 36px; }
+    .footer-brand-name { color: var(--white); font-weight: 700; font-size: .95rem; }
+    .footer-tagline { font-size: .85rem; color: rgba(255,255,255,.4); line-height: 1.6; max-width: 210px; }
+    .footer-col h4 { color: rgba(255,255,255,.45); font-size: .72rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { color: rgba(255,255,255,.6); font-size: .88rem; transition: color .15s; }
+    .footer-col ul a:hover { color: var(--gold); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .footer-copy, .footer-location { font-size: .82rem; color: rgba(255,255,255,.3); }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .entry-grid, .catalog-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .who-grid { grid-template-columns: 1fr 1fr; }
+      .page-hero h1 { font-size: 2.4rem; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      .page-hero { padding: 56px 0 48px; }
+      .page-hero h1 { font-size: 2rem; }
+      .nav-links { display: none; }
+      .who-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+      section { padding: 64px 0; }
+      .cta-section h2 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.png" alt="Open Data Designs">
+        <span class="nav-logo-text">Open Data Designs</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="services.html" class="active">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="how-we-work.html">How We Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-gold">Book a Conversation</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Page Hero ── -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-eyebrow">Services</div>
+    <h1>The right solution for <span>where you are.</span></h1>
+    <p class="page-hero-sub">
+      We start with your situation — your data, your team, your constraints — and design
+      an engagement that fits. Every project begins with understanding before recommending,
+      and delivers something your organization can operate and build on independently.
+    </p>
+  </div>
+</section>
+
+<!-- ── Two Entry Points ── -->
+<section class="entry-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Primary Assessments</div>
+      <h2 class="section-title">Most engagements start here.</h2>
+      <p class="section-sub">Two structured assessments — one focused on your data and reporting environment, one on your systems and operational processes. Both deliver a clear, prioritized roadmap you can act on.</p>
+    </div>
+    <div class="entry-grid">
+
+      <div class="entry-card">
+        <span class="entry-card-num">Assessment 1</span>
+        <h3>Data Management &amp; Reporting Assessment</h3>
+        <p class="entry-tagline">Turn scattered data into trusted insight.</p>
+        <p>A structured review of your data environment — sources, governance, reporting tools, and the gaps between what your data says and what leadership needs it to say. Typical engagement: 3–4 weeks.</p>
+        <div class="entry-triggers">
+          <div class="entry-triggers-label">Common triggers</div>
+          <ul class="trigger-list">
+            <li>We don't trust our reports.</li>
+            <li>We waste hours reconciling numbers across teams.</li>
+            <li>Every department measures things differently.</li>
+            <li>We need a credible data plan to take to leadership.</li>
+          </ul>
+        </div>
+        <div class="entry-deliverable">
+          <div class="entry-deliverable-label">Deliverable</div>
+          <p>Data Modernization Roadmap — prioritized recommendations with phased next steps</p>
+        </div>
+      </div>
+
+      <div class="entry-card">
+        <span class="entry-card-num">Assessment 2</span>
+        <h3>Process &amp; Systems Optimization Analysis</h3>
+        <p class="entry-tagline">Remove friction. Improve flow. Scale with confidence.</p>
+        <p>A review of how data moves within and between your operational systems — workflows, integrations, schema design, and the bottlenecks that slow your team down. Typical engagement: 3–5 weeks.</p>
+        <div class="entry-triggers">
+          <div class="entry-triggers-label">Common triggers</div>
+          <ul class="trigger-list">
+            <li>We've outgrown our current systems.</li>
+            <li>Teams work hard but progress is slow — too much rework.</li>
+            <li>Manual processes are eating time we don't have.</li>
+            <li>Our integrations are fragile and we don't know why.</li>
+          </ul>
+        </div>
+        <div class="entry-deliverable">
+          <div class="entry-deliverable-label">Deliverable</div>
+          <p>Operational Architecture Blueprint — system, process, and integration recommendations</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Full Catalog ── -->
+<section class="catalog-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Full Service Catalog</div>
+      <h2 class="section-title">The complete range of what we deliver.</h2>
+      <p class="section-sub">Assessments open the door. These are the services that follow — and that larger engagements draw from depending on what the work requires.</p>
+    </div>
+    <div class="catalog-grid">
+
+      <div class="catalog-card">
+        <div class="catalog-card-header">
+          <h3>Data Foundation Assessment</h3>
+          <p>Inventory, governance review, maturity benchmark, and a prioritized roadmap for what to fix first.</p>
+        </div>
+        <div class="catalog-card-body">
+          <div class="catalog-what-label">What we do</div>
+          <ul class="catalog-what">
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Stakeholder interviews to capture pain points, goals, and priorities</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Inventory of systems, reports, and tools currently in use</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Governance review — ownership, definitions, accountability</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Maturity benchmark against industry standards</li>
+          </ul>
+          <div class="catalog-benefit">
+            <div class="catalog-benefit-label">Outcome</div>
+            <p>A clear roadmap for fixing today's data issues while building a foundation for scalable growth. Leaders gain confidence in decisions; technical teams gain a prioritized plan.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-header">
+          <h3>Reporting &amp; Insight Modernization</h3>
+          <p>Consolidate and align your reporting into a single, governed source of truth.</p>
+        </div>
+        <div class="catalog-card-body">
+          <div class="catalog-what-label">What we do</div>
+          <ul class="catalog-what">
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Catalog all reports and dashboards across the organization</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Gather requirements for the insights leadership actually needs</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Identify duplicates, inconsistencies, and low-value reporting</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Recommend consolidation into a governed reporting library</li>
+          </ul>
+          <div class="catalog-benefit">
+            <div class="catalog-benefit-label">Outcome</div>
+            <p>One version of the truth. Leaders make faster, more confident decisions. IT gains control over reporting logic and eliminates the duplication that creates conflicting numbers.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-header">
+          <h3>Operational Efficiency Accelerator</h3>
+          <p>Map workflows, identify bottlenecks, and design the improvements that matter most.</p>
+        </div>
+        <div class="catalog-card-body">
+          <div class="catalog-what-label">What we do</div>
+          <ul class="catalog-what">
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Map workflows and data flows across departments</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Assess how applications capture, store, and deliver data</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Review schema design, query performance, and integration patterns</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Recommend redesign, automation, and architectural improvements</li>
+          </ul>
+          <div class="catalog-benefit">
+            <div class="catalog-benefit-label">Outcome</div>
+            <p>Teams work faster with fewer errors. Applications and integrations are optimized for data quality and system performance, reducing the manual effort that consumes capacity without adding value.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-header">
+          <h3>Cost &amp; Value Realization</h3>
+          <p>Find the waste, quantify the savings, and make the case for change in business terms.</p>
+        </div>
+        <div class="catalog-card-body">
+          <div class="catalog-what-label">What we do</div>
+          <ul class="catalog-what">
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Analyze systems, licenses, and processes for overlap and waste</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Quantify time lost to manual work, errors, and duplicated reporting</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Highlight redundant or underused technology</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Calculate ROI for consolidation, automation, and governance improvements</li>
+          </ul>
+          <div class="catalog-benefit">
+            <div class="catalog-benefit-label">Outcome</div>
+            <p>Savings opportunities are surfaced and quantified. Executives see the financial case in business terms. Technology leaders gain evidence to rationalize platforms and reduce total cost of ownership.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-header">
+          <h3>Enterprise Data Enablement</h3>
+          <p>Architect, build, and train — a governed data platform your team can operate and grow.</p>
+        </div>
+        <div class="catalog-card-body">
+          <div class="catalog-what-label">What we do</div>
+          <ul class="catalog-what">
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Design governed, auditable data architectures — warehouse, vault, marts</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Apply modeling standards (Data Vault, dimensional, 3NF) based on use case</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Establish governance, stewardship, and role-based access</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Train internal staff — playbooks, runbooks, and hands-on mentoring</li>
+          </ul>
+          <div class="catalog-benefit">
+            <div class="catalog-benefit-label">Outcome</div>
+            <p>A governed, auditable platform your team understands and can manage. Training transfers real capability — not just familiarity. The development team may include your existing staff, ODD resources, or both.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-header">
+          <h3>Future-Ready Roadmap</h3>
+          <p>Align today's data investments with tomorrow's goals — AI readiness, analytics maturity, and strategic growth.</p>
+        </div>
+        <div class="catalog-card-body">
+          <div class="catalog-what-label">What we do</div>
+          <ul class="catalog-what">
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Align data priorities with corporate strategy and regulatory requirements</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Identify where advanced analytics and AI create real business value</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Define phased steps to evolve reporting, governance, and platforms</li>
+            <li><span class="catalog-bullet"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></span>Evaluate tools and architectures objectively — vendor-neutral</li>
+          </ul>
+          <div class="catalog-benefit">
+            <div class="catalog-benefit-label">Outcome</div>
+            <p>Today's investments connect to tomorrow's goals. Executives gain a clear vision for value creation. Technical leaders get a phased, practical plan for scaling securely and efficiently.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works ── -->
+<section class="how-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">How Engagements Work</div>
+      <h2 class="section-title" style="color:var(--white)">From first conversation to independent operation.</h2>
+      <p class="section-sub">Every engagement follows a consistent pattern — understand before recommending, design before building, train before handing off.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Assess</h3>
+        <p>We start with discovery — stakeholder interviews, system review, and a clear-eyed look at what you have. No recommendations until we understand the situation. The deliverable is a roadmap, not a sales pitch for the next phase.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>Design &amp; Build</h3>
+        <p>Architecture is led by Darwin. Development is executed by a team assembled to fit the work — your existing staff (trained up as needed), ODD resources, or a combination. Standards are documented so the work is maintainable regardless of who built it.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Enable &amp; Hand Off</h3>
+        <p>Training, playbooks, and runbooks are part of the engagement — not an afterthought. When we're done, your team operates the platform. That is the definition of a successful engagement, not an ongoing retainer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Who We Serve ── -->
+<section class="who-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Who We Serve</div>
+      <h2 class="section-title">Organizations at an inflection point.</h2>
+      <p class="section-sub">The common thread is not industry or size — it's the moment when the current approach to data stops being adequate for what the organization needs to become.</p>
+    </div>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-icon">🚀</div>
+        <h4>Startups</h4>
+        <p>Building a data foundation that won't need to be rebuilt in 18 months. Getting the architecture right before the data gets too messy to move.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">📈</div>
+        <h4>Small &amp; Mid-Size Businesses</h4>
+        <p>Outgrown spreadsheets and ad hoc reporting. Ready for systems that give leadership reliable numbers without a full-time data team to maintain them.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🏛</div>
+        <h4>Nonprofits &amp; Mission-Driven Orgs</h4>
+        <p>Strong mission, limited budget, and stakeholders who need credible data. We actively serve organizations where the outcome matters more than the contract size.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🏢</div>
+        <h4>Mid-Market Enterprises</h4>
+        <p>Complex data environments, compliance requirements, and the organizational scale to implement properly. Ready for an enterprise-grade approach without enterprise-scale cost.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Not sure which service fits?</h2>
+    <p>Start with a conversation. We'll listen to where you are and tell you honestly what the right starting point looks like — whether that's an assessment, an architecture engagement, or something else entirely.</p>
+    <div class="cta-group">
+      <a href="contact.html" class="btn btn-gold btn-lg">Book a Conversation →</a>
+      <a href="about.html" class="btn btn-outline-gold btn-lg">About the Practice</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">
+          <img src="logo.png" alt="Open Data Designs">
+          <span class="footer-brand-name">Open Data Designs</span>
+        </div>
+        <p class="footer-tagline">Trusted Data. Confident Decisions.<br>Phoenix, AZ — serving clients nationally.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Data Foundation Assessment</a></li>
+          <li><a href="services.html">Reporting Modernization</a></li>
+          <li><a href="services.html">Process Optimization</a></li>
+          <li><a href="services.html">Enterprise Data Enablement</a></li>
+          <li><a href="how-we-work.html">How We Work</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Darwin Fisk</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="how-we-work.html">How We Work</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:info@opendatadesigns.com">info@opendatadesigns.com</a></li>
+          <li><a href="tel:+16027345615">602-734-5615</a></li>
+          <li><a href="https://www.linkedin.com/company/open-data-designs" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© <span id="yr"></span> Open Data Designs, LLC. All rights reserved.</span>
+      <span class="footer-location">Phoenix, Arizona</span>
+    </div>
+  </div>
+</footer>
+
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>

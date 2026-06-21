@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Data Designs — Trusted Data. Confident Decisions.</title>
+  <meta name="description" content="Open Data Designs delivers enterprise-grade data platforms with human judgment at the center. Governed data engineering, AI-augmented practice, founder-led on every engagement.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue:       #002366;
+      --blue-mid:   #0a3580;
+      --blue-light: #e8f0fe;
+      --gold:       #FFD700;
+      --gold-dark:  #c9a800;
+      --white:      #ffffff;
+      --gray-50:    #f8fafc;
+      --gray-100:   #f1f5f9;
+      --gray-200:   #e2e8f0;
+      --gray-500:   #64748b;
+      --gray-700:   #334155;
+      --gray-900:   #0f172a;
+      --radius:     12px;
+      --shadow:     0 4px 24px rgba(0,35,102,.10);
+      --shadow-lg:  0 8px 40px rgba(0,35,102,.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      color: var(--gray-900);
+      background: var(--white);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-block;
+      padding: .65rem 1.3rem;
+      border-radius: 9px;
+      font-weight: 600;
+      font-size: .9rem;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s, background .15s, color .15s;
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 18px rgba(0,0,0,.18); }
+    .btn-lg { padding: .85rem 1.75rem; font-size: 1rem; border-radius: 10px; }
+    .btn-gold { background: var(--gold); color: var(--blue); border-color: var(--gold); }
+    .btn-blue { background: var(--blue); color: var(--white); border-color: var(--blue); }
+    .btn-outline-gold { background: transparent; color: var(--gold); border-color: var(--gold); }
+    .btn-outline-gold:hover { background: var(--gold); color: var(--blue); }
+    .btn-outline-white { background: transparent; color: var(--white); border-color: rgba(255,255,255,.5); }
+    .btn-outline-white:hover { background: rgba(255,255,255,.1); border-color: var(--white); }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--blue);
+      border-bottom: 2px solid rgba(255,215,0,.2);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px; gap: 24px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .nav-logo img { height: 40px; width: 40px; }
+    .nav-logo-text { color: var(--white); font-weight: 700; font-size: 1.05rem; letter-spacing: -.01em; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,.78); font-size: .9rem; font-weight: 500;
+      transition: color .15s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── Hero ── */
+    .hero { background: var(--blue); padding: 96px 0 88px; }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,215,0,.12); border: 1px solid rgba(255,215,0,.3);
+      border-radius: 999px; padding: .35rem .85rem;
+      font-size: .75rem; font-weight: 700; color: var(--gold);
+      letter-spacing: .06em; text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: 3.25rem; font-weight: 800; line-height: 1.1;
+      color: var(--white); letter-spacing: -.03em; margin-bottom: 20px;
+    }
+    .hero h1 .accent { color: var(--gold); }
+    .hero-sub {
+      font-size: 1.1rem; color: rgba(255,255,255,.72);
+      line-height: 1.7; margin-bottom: 36px; max-width: 480px;
+    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .hero-card {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,215,0,.2);
+      border-radius: 16px; padding: 32px;
+    }
+    .hero-card-label {
+      font-size: .72rem; font-weight: 700; letter-spacing: .09em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 20px;
+    }
+    .outcome-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .outcome-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      color: rgba(255,255,255,.82); font-size: .92rem; line-height: 1.55;
+    }
+    .check {
+      display: flex; align-items: center; justify-content: center;
+      width: 20px; height: 20px; min-width: 20px;
+      border-radius: 50%;
+      background: rgba(255,215,0,.15); border: 1px solid rgba(255,215,0,.4);
+      color: var(--gold); font-size: .65rem; font-weight: 800; margin-top: 1px;
+    }
+
+    /* ── Section base ── */
+    section { padding: 88px 0; }
+    .section-label {
+      font-size: .72rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: 2.25rem; font-weight: 800; letter-spacing: -.025em;
+      color: var(--gray-900); margin-bottom: 14px; line-height: 1.2;
+    }
+    .section-sub {
+      font-size: 1rem; color: var(--gray-500);
+      max-width: 560px; line-height: 1.7;
+    }
+    .section-header { margin-bottom: 56px; }
+
+    /* ── Services ── */
+    .services-section { background: var(--gray-50); }
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .service-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius); padding: 32px 28px;
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .service-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .service-icon {
+      width: 48px; height: 48px; background: var(--blue-light);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .service-icon svg { width: 24px; height: 24px; color: var(--blue); }
+    .service-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--gray-900); margin-bottom: 10px; }
+    .service-card p { font-size: .92rem; color: var(--gray-500); line-height: 1.65; margin-bottom: 20px; }
+    .service-link {
+      font-size: .875rem; font-weight: 600; color: var(--blue);
+      display: inline-flex; align-items: center; gap: 4px; transition: gap .15s;
+    }
+    .service-link:hover { gap: 8px; }
+
+    /* ── Why ODD ── */
+    .why-section { background: var(--white); }
+    .pillars-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .pillar {
+      padding: 36px 28px 32px;
+      border-top: 3px solid var(--gold);
+      background: var(--gray-50);
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+    .pillar-number {
+      font-size: 2.5rem; font-weight: 800; color: var(--blue);
+      opacity: .12; line-height: 1; margin-bottom: 14px;
+    }
+    .pillar h3 { font-size: 1.05rem; font-weight: 700; color: var(--gray-900); margin-bottom: 10px; }
+    .pillar p { font-size: .92rem; color: var(--gray-500); line-height: 1.65; }
+
+    /* ── Outcomes ── */
+    .outcomes-section { background: var(--blue); }
+    .outcomes-section .section-label { color: var(--gold); }
+    .outcomes-section .section-title { color: var(--white); }
+    .outcomes-section .section-sub { color: rgba(255,255,255,.65); }
+    .outcomes-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+    .outcome-card {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,215,0,.15);
+      border-radius: var(--radius); padding: 28px;
+    }
+    .outcome-icon { font-size: 1.6rem; margin-bottom: 12px; }
+    .outcome-card h4 { font-size: .95rem; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+    .outcome-card p { font-size: .88rem; color: rgba(255,255,255,.68); line-height: 1.65; }
+
+    /* ── Bridle ── */
+    .bridle-section { background: var(--gray-50); }
+    .bridle-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .bridle-section .section-label { color: var(--blue); }
+    .bridle-inner h2 {
+      font-size: 1.9rem; font-weight: 800; color: var(--gray-900);
+      margin-bottom: 18px; letter-spacing: -.02em; line-height: 1.2;
+    }
+    .bridle-intro { font-size: .97rem; color: var(--gray-500); line-height: 1.72; margin-bottom: 16px; }
+    .bridle-ctas { margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .bridle-quote-block {
+      background: var(--blue); border-radius: 16px; padding: 44px 40px;
+      position: relative; overflow: hidden;
+    }
+    .bridle-quote-mark {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 5rem; line-height: .8; color: var(--gold); opacity: .35;
+      position: absolute; top: 16px; left: 28px;
+    }
+    .bridle-quote {
+      font-size: 1.1rem; font-style: italic; color: var(--white);
+      line-height: 1.7; padding-top: 28px;
+    }
+    .bridle-attr { margin-top: 22px; font-size: .85rem; color: var(--gold); font-weight: 600; }
+
+    /* ── Closing CTA ── */
+    .cta-section { background: var(--blue); padding: 104px 0; text-align: center; }
+    .cta-section h2 {
+      font-size: 2.5rem; font-weight: 800; color: var(--white);
+      letter-spacing: -.03em; line-height: 1.15; margin-bottom: 16px;
+      max-width: 680px; margin-left: auto; margin-right: auto;
+    }
+    .cta-section p {
+      font-size: 1.05rem; color: rgba(255,255,255,.68);
+      margin-bottom: 40px; max-width: 480px;
+      margin-left: auto; margin-right: auto; line-height: 1.65;
+    }
+    .cta-group { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+    /* ── Footer ── */
+    footer { background: var(--gray-900); padding: 60px 0 32px; }
+    .footer-inner {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 32px;
+    }
+    .footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-brand img { height: 36px; width: 36px; }
+    .footer-brand-name { color: var(--white); font-weight: 700; font-size: .95rem; }
+    .footer-tagline { font-size: .85rem; color: rgba(255,255,255,.4); line-height: 1.6; max-width: 210px; }
+    .footer-col h4 {
+      color: rgba(255,255,255,.45); font-size: .72rem; font-weight: 700;
+      letter-spacing: .09em; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { color: rgba(255,255,255,.6); font-size: .88rem; transition: color .15s; }
+    .footer-col ul a:hover { color: var(--gold); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .footer-copy, .footer-location { font-size: .82rem; color: rgba(255,255,255,.3); }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero h1 { font-size: 2.6rem; }
+      .services-grid, .pillars-grid { grid-template-columns: 1fr; }
+      .outcomes-grid { grid-template-columns: 1fr; }
+      .bridle-inner { grid-template-columns: 1fr; gap: 40px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .cta-section h2 { font-size: 2rem; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      .hero { padding: 64px 0 56px; }
+      .hero h1 { font-size: 2.1rem; }
+      .nav-links { display: none; }
+      .footer-inner { grid-template-columns: 1fr; }
+      section { padding: 64px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.png" alt="Open Data Designs">
+        <span class="nav-logo-text">Open Data Designs</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="how-we-work.html">How We Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-gold">Book a Conversation</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">
+          <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor"><circle cx="4" cy="4" r="4"/></svg>
+          Data Architecture &amp; Engineering Practice
+        </div>
+        <h1>Trusted Data.<br><span class="accent">Confident</span> Decisions.</h1>
+        <p class="hero-sub">
+          Requirements-led data architecture designed, delivered, and trained by a
+          practice built to scale — so your organization gains capability, not dependency.
+        </p>
+        <div class="hero-ctas">
+          <a href="contact.html" class="btn btn-gold btn-lg">Book a Conversation →</a>
+          <a href="the-bridle.html" class="btn btn-outline-gold btn-lg">The AI Bridle: Read the Article →</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-card">
+          <div class="hero-card-label">Proven Outcomes</div>
+          <ul class="outcome-list">
+            <li><span class="check">✓</span>Reporting cycles reduced from weeks to hours</li>
+            <li><span class="check">✓</span>Siloed data unified into a single governed layer</li>
+            <li><span class="check">✓</span>$80K+ saved annually retiring redundant systems</li>
+            <li><span class="check">✓</span>Real-time executive visibility into key performance metrics</li>
+            <li><span class="check">✓</span>Teams enabled to own their data independently</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── What We Do ── -->
+<section class="services-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Turn complexity into clarity.</h2>
+      <p class="section-sub">Practical, scalable solutions across the full data lifecycle — from the systems that run your business to the analytics that guide it.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 20h20M6 20V10l6-6 6 6v10"/><path d="M10 20v-5h4v5"/>
+          </svg>
+        </div>
+        <h3>Strategic Planning</h3>
+        <p>Tailored strategies aligned with your goals. Data-driven roadmaps that identify growth opportunities, mitigate risk, and drive measurable business outcomes — built on what you actually need, not what sells.</p>
+        <a href="services.html" class="service-link">View all services →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+          </svg>
+        </div>
+        <h3>Data Management</h3>
+        <p>Scalable architectures on Snowflake, SQL Server, and cloud platforms. Data Vault modeling, governance frameworks, automated pipelines — and training so your team can manage it all.</p>
+        <a href="services.html" class="service-link">View all services →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <path d="M8 21h8M12 17v4"/>
+          </svg>
+        </div>
+        <h3>Business Solutions</h3>
+        <p>Dashboards and reports that give leadership real visibility. Workflow automation that eliminates manual effort. Systems designed to scale with your organization rather than constrain it.</p>
+        <a href="services.html" class="service-link">View all services →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Why ODD ── -->
+<section class="why-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Why Open Data Designs</div>
+      <h2 class="section-title">What makes us different.</h2>
+      <p class="section-sub">Three principles that define every engagement — and separate ODD from every other data consultancy.</p>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-number">01</div>
+        <h3>Architecture-Led on Every Engagement</h3>
+        <p>Darwin Fisk leads architecture, strategy, and standards on every project. Engineering delivery is executed by a skilled team under his direct oversight — so you get principal-level thinking applied consistently, at scale.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-number">02</div>
+        <h3>Enablement Over Dependency</h3>
+        <p>We build solutions your team can understand, manage, and grow without us. That includes growing your people — we have trained report analysts into data engineers and good writers into technical practitioners. The goal is your capability, not your reliance on a consultant.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-number">03</div>
+        <h3>A Practice Built to Scale With You</h3>
+        <p>ODD is not a solo practice. We bring the right resources — internal team, trained specialists, and delivery partners — to match the scope of your engagement. Early-phase assessments are nimble; full platform builds have the depth to match.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Outcomes ── -->
+<section class="outcomes-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Client Outcomes</div>
+      <h2 class="section-title">Real results from real engagements.</h2>
+      <p class="section-sub">Every engagement is designed to produce outcomes you can measure — in time saved, costs reduced, and decisions made with confidence.</p>
+    </div>
+    <div class="outcomes-grid">
+      <div class="outcome-card">
+        <div class="outcome-icon">⏱</div>
+        <h4>Reporting Cycles: Weeks → Hours</h4>
+        <p>Automated dashboards replace manual reporting processes. Executives see the numbers they need without waiting, without reconciliation debates, and without relying on one person who knows how to run the report.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">🔗</div>
+        <h4>One Trusted Version of the Truth</h4>
+        <p>Siloed data sources unified into a single, governed reporting layer. No more conflicting numbers across departments. No more "which spreadsheet is right?" before every leadership meeting.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">💰</div>
+        <h4>$80K+ Saved Annually</h4>
+        <p>Redundant and underutilized analytics platforms retired. Licensing costs eliminated. Infrastructure rationalized around what actually drives decisions — not what was bought three years ago.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">🏗</div>
+        <h4>Teams That Own Their Data</h4>
+        <p>Internal staff trained with playbooks and runbooks, not kept in the dark. When the engagement ends, your team is more capable than when it started — and not dependent on a consultant to keep the lights on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── The Bridle ── -->
+<section class="bridle-section">
+  <div class="container">
+    <div class="bridle-inner">
+      <div>
+        <div class="section-label">Featured Article</div>
+        <h2>The Bridle: Riding the AI Stallion Without Losing the Reins</h2>
+        <p class="bridle-intro">
+          After ten months building a complex enterprise data platform with AI as a genuine collaborator,
+          Darwin Fisk documented what that experience actually taught him — about governance protocols,
+          permission vocabularies, session continuity, and why human judgment remains the most important
+          variable in any AI-assisted system.
+        </p>
+        <p class="bridle-intro">
+          This is the experience behind ODD's AI-augmented engineering practice, and an honest account
+          of what it takes to make a powerful tool disciplined enough to trust.
+        </p>
+        <div class="bridle-ctas">
+          <a href="the-bridle.html" class="btn btn-blue btn-lg">Read the Full Article →</a>
+          <a href="how-we-work.html" class="btn btn-outline-white btn-lg" style="color:var(--blue); border-color:var(--gray-300);">How We Work →</a>
+        </div>
+      </div>
+      <div>
+        <div class="bridle-quote-block">
+          <span class="bridle-quote-mark">"</span>
+          <p class="bridle-quote">
+            The highest-leverage use of AI assistance is not code generation —
+            it is consistency enforcement. A solo practitioner building a governed
+            platform faces constant pressure to let standards slip under time pressure.
+            An AI assistant that has internalized the project's standards and will
+            consistently apply them is a more valuable collaborator than one that can
+            generate clever code but ignores conventions.
+          </p>
+          <div class="bridle-attr">— Darwin Fisk, The Bridle</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Closing CTA ── -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Trusted data builds confident decisions.</h2>
+    <p>And confident decisions build strong organizations. Let's talk about where yours stands — and where it could go.</p>
+    <div class="cta-group">
+      <a href="contact.html" class="btn btn-gold btn-lg">Book a Conversation →</a>
+      <a href="services.html" class="btn btn-outline-gold btn-lg">View Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">
+          <img src="logo.png" alt="Open Data Designs">
+          <span class="footer-brand-name">Open Data Designs</span>
+        </div>
+        <p class="footer-tagline">Trusted Data. Confident Decisions.<br>Phoenix, AZ — serving clients nationally.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Data Foundation Assessment</a></li>
+          <li><a href="services.html">Reporting Modernization</a></li>
+          <li><a href="services.html">Process Optimization</a></li>
+          <li><a href="services.html">Enterprise Data Enablement</a></li>
+          <li><a href="how-we-work.html">How We Work</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Darwin Fisk</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="how-we-work.html">How We Work</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:info@opendatadesigns.com">info@opendatadesigns.com</a></li>
+          <li><a href="tel:+16027345615">602-734-5615</a></li>
+          <li><a href="https://www.linkedin.com/company/open-data-designs" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© <span id="yr"></span> Open Data Designs, LLC. All rights reserved.</span>
+      <span class="footer-location">Phoenix, Arizona</span>
+    </div>
+  </div>
+</footer>
+
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
