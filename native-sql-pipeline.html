@@ -9,6 +9,10 @@
   <!-- Canonical -->
   <link rel="canonical" href="https://opendatadesigns.com/native-sql-pipeline.html">
 
+  <!-- Favicon -->
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="logo.png">
+
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:title" content="Cost-Effective Data Management: A Native SQL Approach">
@@ -137,8 +141,8 @@
     .article-note p { font-size: .95rem; color: var(--gray-700); line-height: 1.7; margin: 0; }
     .article-divider { border: none; border-top: 1px solid var(--gray-200); margin: 3em 0; }
 
-    /* ── Sticky sidebar ── */
-    .article-sidebar { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
+    /* ── Sidebar ── */
+    .article-sidebar { display: flex; flex-direction: column; gap: 24px; }
     .sidebar-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
     .sidebar-card h4 { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
     .sidebar-card p { font-size: .875rem; color: var(--gray-500); line-height: 1.65; margin-bottom: 14px; }
@@ -172,7 +176,6 @@
     /* ── Responsive ── */
     @media (max-width: 960px) {
       .article-inner { grid-template-columns: 1fr; }
-      .article-sidebar { position: static; }
       .article-hero h1 { font-size: 2.4rem; }
       .footer-inner { grid-template-columns: 1fr 1fr; }
     }
@@ -199,13 +202,14 @@
         <span class="nav-logo-text">Open Data Designs</span>
       </a>
       <ul class="nav-links">
+        <li><a href="what-we-do.html">What We Do</a></li>
+        <li><a href="who-we-serve.html">Who We Serve</a></li>
+        <li><a href="how-we-work.html">How We Work</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="blog.html" class="active">Blog</a></li>
-        <li><a href="how-we-work.html">How We Work</a></li>
-        <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
+        <li><a href="about.html">About</a></li>
       </ul>
-      <a href="contact.html" class="btn btn-gold">Book a Conversation</a>
     </div>
   </div>
 </nav>
@@ -247,10 +251,12 @@
           They want to know what it will cost.
         </p>
 
-        <p>
-          My answer surprises them: less than you think, if you build it the right way. More than you can
-          afford, if you build it the way the vendors want you to.
-        </p>
+        <div class="article-pullquote">
+          <p>
+            My answer surprises them: less than you think, if you build it the right way. More than you can
+            afford, if you build it the way the vendors want you to.
+          </p>
+        </div>
 
         <p>
           The difference is whether you control the SQL layer directly — or pay someone else to translate
@@ -580,7 +586,7 @@
           <p>
             This article was researched, shaped, and edited with AI assistance — the same tools, the same
             discipline, and the same governed process described across this site. The source material was
-            25 years of practitioner experience and direct engagement work building production data
+            35+ years of practitioner experience and direct engagement work building production data
             platforms for mid-market clients. My role was the same role I always occupy: I provided the
             context, I steered the direction, I corrected what was wrong, I pushed for what was missing,
             and I made every judgment call about what stayed and what didn't. The bridle was on.
@@ -631,7 +637,7 @@
             Thinking about your data infrastructure? Let's talk about what the right approach looks
             like for your organization.
           </p>
-          <a href="contact.html" class="btn btn-gold" style="font-size:.88rem; padding:.6rem 1.2rem;">Book a Conversation →</a>
+          <a href="schedule.html" class="btn btn-gold" style="font-size:.88rem; padding:.6rem 1.2rem;">Book a Conversation →</a>
         </div>
 
         <div class="sidebar-card">
@@ -657,7 +663,7 @@
     <h2>Trusted data builds confident decisions.</h2>
     <p>Want to talk about what a SQL-native platform could look like for your organization?</p>
     <div class="cta-group">
-      <a href="contact.html" class="btn btn-gold btn-lg">Book a Conversation →</a>
+      <a href="schedule.html" class="btn btn-gold btn-lg">Book a Conversation →</a>
       <a href="how-we-work.html" class="btn btn-outline-gold btn-lg">How We Work</a>
     </div>
   </div>
@@ -687,6 +693,7 @@
         <h4>Company</h4>
         <ul>
           <li><a href="about.html">About Darwin Fisk</a></li>
+          <li><a href="who-we-serve.html">Who We Serve</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="how-we-work.html">How We Work</a></li>
           <li><a href="contact.html">Contact</a></li>

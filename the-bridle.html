@@ -9,6 +9,10 @@
   <!-- Canonical -->
   <link rel="canonical" href="https://opendatadesigns.com/the-bridle.html">
 
+  <!-- Favicon -->
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="logo.png">
+
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:title" content="The Bridle: AI Governance for Data Platform Work">
@@ -125,7 +129,7 @@
     /* ── Article body ── */
     .article-body { font-size: 1.05rem; color: var(--gray-700); line-height: 1.85; }
     .article-body p { margin-bottom: 1.5em; }
-    .article-body h2 { font-size: 1.5rem; font-weight: 800; color: var(--gray-900); letter-spacing: -.02em; line-height: 1.25; margin-top: 2.5em; margin-bottom: .75em; padding-top: 2em; border-top: 1px solid var(--gray-200); }
+    .article-body h2 { font-size: 1.5rem; font-weight: 800; color: var(--gray-900); letter-spacing: -.02em; line-height: 1.25; margin-top: 2.5em; margin-bottom: .75em; padding-top: 2em; border-top: 1px solid var(--gray-200); scroll-margin-top: 96px; }
     .article-body h2:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
     .article-body ul { padding-left: 1.5em; margin-bottom: 1.5em; display: flex; flex-direction: column; gap: .5em; }
     .article-body ul li { color: var(--gray-700); }
@@ -136,8 +140,8 @@
     .article-note p { font-size: .95rem; color: var(--gray-700); line-height: 1.7; margin: 0; }
     .article-divider { border: none; border-top: 1px solid var(--gray-200); margin: 3em 0; }
 
-    /* ── Sticky sidebar ── */
-    .article-sidebar { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
+    /* ── Sidebar ── */
+    .article-sidebar { display: flex; flex-direction: column; gap: 24px; }
     .sidebar-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
     .sidebar-card h4 { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
     .sidebar-card p { font-size: .875rem; color: var(--gray-500); line-height: 1.65; margin-bottom: 14px; }
@@ -171,7 +175,6 @@
     /* ── Responsive ── */
     @media (max-width: 960px) {
       .article-inner { grid-template-columns: 1fr; }
-      .article-sidebar { position: static; }
       .article-hero h1 { font-size: 2.4rem; }
       .footer-inner { grid-template-columns: 1fr 1fr; }
     }
@@ -198,13 +201,14 @@
         <span class="nav-logo-text">Open Data Designs</span>
       </a>
       <ul class="nav-links">
+        <li><a href="what-we-do.html">What We Do</a></li>
+        <li><a href="who-we-serve.html">Who We Serve</a></li>
+        <li><a href="how-we-work.html">How We Work</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="blog.html" class="active">Blog</a></li>
-        <li><a href="how-we-work.html">How We Work</a></li>
-        <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
+        <li><a href="about.html">About</a></li>
       </ul>
-      <a href="contact.html" class="btn btn-gold">Book a Conversation</a>
     </div>
   </div>
 </nav>
@@ -267,7 +271,7 @@
 
         <hr class="article-divider">
 
-        <h2>The Wild Stallion Problem</h2>
+        <h2 id="wild-stallion-problem">The Wild Stallion Problem</h2>
 
         <p>
           The first thing you notice when you start working seriously with an AI assistant is that it is
@@ -314,13 +318,13 @@
         <div class="article-pullquote">
           <p>
             This is the wild stallion problem. An AI coding assistant is enormously powerful and very fast
-            and will go wherever it understands you to be pointing. The question is never <em>can it do
-            this</em> — it's <em>have you told it what this means</em>. A bridle doesn't slow a horse down.
-            It gives you the ability to steer.
+            and will go wherever it understands you to be pointing. The real question is never whether
+            it <em>can</em> do something — it's whether you've <em>told it what that means</em>. A bridle
+            doesn't slow a horse down. It gives you the ability to steer.
           </p>
         </div>
 
-        <h2>Building the Protocols</h2>
+        <h2 id="building-the-protocols">Building the Protocols</h2>
 
         <p>
           I want to be honest about how the AI governance framework developed, because it didn't start as
@@ -353,7 +357,7 @@
           ambiguity. The bridle was on, and we could actually work.
         </p>
 
-        <h2>Building the Library</h2>
+        <h2 id="building-the-library">Building the Library</h2>
 
         <p>
           Rules accumulate quickly on a real engagement. Each project facet — staging patterns, data vault
@@ -388,7 +392,7 @@
           <p>This is the difference between governing a session and governing a system. A session ends. A library persists.</p>
         </div>
 
-        <h2>Why I Talk to AI Instead of Prompting It</h2>
+        <h2 id="why-i-talk-to-ai">Why I Talk to AI Instead of Prompting It</h2>
 
         <p>
           There is a school of thought that says the right way to use AI is to write precise, structured
@@ -435,7 +439,7 @@
           where the other belongs.
         </p>
 
-        <h2>What I Actually Delegate</h2>
+        <h2 id="what-i-actually-delegate">What I Actually Delegate</h2>
 
         <p>
           The clearest thing I learned over these months is that the highest-value use of AI is not code
@@ -474,7 +478,7 @@
           the fuller picture — but only because I knew to ask for it.
         </p>
 
-        <h2>Documentation as a Consistency Engine</h2>
+        <h2 id="documentation-as-consistency-engine">Documentation as a Consistency Engine</h2>
 
         <p>
           AI is exceptionally good at creating deep, thorough documentation for a system it understands.
@@ -504,7 +508,7 @@
           redirects that tendency.
         </p>
 
-        <h2>Testing: Where AI Earns Its Keep and Loses Its Patience</h2>
+        <h2 id="testing">Testing: Where AI Earns Its Keep and Loses Its Patience</h2>
 
         <p>
           AI is genuinely valuable for data testing, and it's an area where the return on investment is
@@ -527,7 +531,7 @@
           it manually. You just have to budget for the back-and-forth.
         </p>
 
-        <h2>Running Multiple Threads</h2>
+        <h2 id="running-multiple-threads">Running Multiple Threads</h2>
 
         <p>
           At some point I started using a second AI tool inside VS Code alongside Claude in the terminal.
@@ -545,7 +549,7 @@
           create.
         </p>
 
-        <h2>Continuity Across Sessions</h2>
+        <h2 id="continuity-across-sessions">Continuity Across Sessions</h2>
 
         <p>
           One problem nobody talks about enough when they talk about AI-assisted development: sessions end.
@@ -572,7 +576,7 @@
           AI — contributed what. That's not just useful for continuity. It's useful for accountability.
         </p>
 
-        <h2>The Partnership, Honestly Assessed</h2>
+        <h2 id="the-partnership-honestly-assessed">The Partnership, Honestly Assessed</h2>
 
         <p>
           There are things the AI does that genuinely impress me. Its ability to hold a complex schema in
@@ -614,7 +618,7 @@
           conversation. And stay alert regardless.
         </p>
 
-        <h2>What the Journey Taught Me</h2>
+        <h2 id="what-the-journey-taught-me">What the Journey Taught Me</h2>
 
         <p>
           I started this engagement skeptical of AI hype and ended it convinced that AI-assisted development
@@ -681,17 +685,17 @@
         <div class="sidebar-card">
           <h4>In this article</h4>
           <ul class="toc-list">
-            <li><a href="#">The Wild Stallion Problem</a></li>
-            <li><a href="#">Building the Protocols</a></li>
-            <li><a href="#">Building the Library</a></li>
-            <li><a href="#">Why I Talk to AI Instead of Prompting It</a></li>
-            <li><a href="#">What I Actually Delegate</a></li>
-            <li><a href="#">Documentation as a Consistency Engine</a></li>
-            <li><a href="#">Testing</a></li>
-            <li><a href="#">Running Multiple Threads</a></li>
-            <li><a href="#">Continuity Across Sessions</a></li>
-            <li><a href="#">The Partnership, Honestly Assessed</a></li>
-            <li><a href="#">What the Journey Taught Me</a></li>
+            <li><a href="#wild-stallion-problem">The Wild Stallion Problem</a></li>
+            <li><a href="#building-the-protocols">Building the Protocols</a></li>
+            <li><a href="#building-the-library">Building the Library</a></li>
+            <li><a href="#why-i-talk-to-ai">Why I Talk to AI Instead of Prompting It</a></li>
+            <li><a href="#what-i-actually-delegate">What I Actually Delegate</a></li>
+            <li><a href="#documentation-as-consistency-engine">Documentation as a Consistency Engine</a></li>
+            <li><a href="#testing">Testing</a></li>
+            <li><a href="#running-multiple-threads">Running Multiple Threads</a></li>
+            <li><a href="#continuity-across-sessions">Continuity Across Sessions</a></li>
+            <li><a href="#the-partnership-honestly-assessed">The Partnership, Honestly Assessed</a></li>
+            <li><a href="#what-the-journey-taught-me">What the Journey Taught Me</a></li>
           </ul>
         </div>
 
@@ -709,7 +713,7 @@
             The methodology in this article is how ODD approaches every engagement.
             If that sounds like what you need, let's talk.
           </p>
-          <a href="contact.html" class="btn btn-gold" style="font-size:.88rem; padding:.6rem 1.2rem;">Book a Conversation →</a>
+          <a href="schedule.html" class="btn btn-gold" style="font-size:.88rem; padding:.6rem 1.2rem;">Book a Conversation →</a>
         </div>
 
         <div class="sidebar-card">
@@ -729,7 +733,7 @@
     <h2>Trusted data builds confident decisions.</h2>
     <p>Want to talk about how ODD's approach could apply to your organization?</p>
     <div class="cta-group">
-      <a href="contact.html" class="btn btn-gold btn-lg">Book a Conversation →</a>
+      <a href="schedule.html" class="btn btn-gold btn-lg">Book a Conversation →</a>
       <a href="how-we-work.html" class="btn btn-outline-gold btn-lg">How We Work</a>
     </div>
   </div>
@@ -759,6 +763,7 @@
         <h4>Company</h4>
         <ul>
           <li><a href="about.html">About Darwin Fisk</a></li>
+          <li><a href="who-we-serve.html">Who We Serve</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="how-we-work.html">How We Work</a></li>
           <li><a href="contact.html">Contact</a></li>

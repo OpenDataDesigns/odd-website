@@ -9,6 +9,10 @@
   <!-- Canonical -->
   <link rel="canonical" href="https://opendatadesigns.com/contact.html">
 
+  <!-- Favicon -->
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="logo.png">
+
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Contact — Open Data Designs">
@@ -73,6 +77,12 @@
     .page-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
     .page-hero h1 { font-size: 3rem; font-weight: 800; color: var(--white); letter-spacing: -.03em; line-height: 1.1; margin-bottom: 20px; max-width: 640px; }
     .page-hero-sub { font-size: 1.1rem; color: rgba(255,255,255,.72); line-height: 1.7; max-width: 540px; }
+
+    /* ── Schedule callout ── */
+    .schedule-callout { background: var(--blue); padding: 40px 0; }
+    .schedule-callout-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .schedule-callout h2 { font-size: 1.3rem; font-weight: 800; color: var(--white); letter-spacing: -.01em; margin-bottom: 6px; }
+    .schedule-callout p { font-size: .92rem; color: rgba(255,255,255,.68); }
 
     /* ── Contact section ── */
     .contact-section { padding: 88px 0; background: var(--gray-50); }
@@ -180,13 +190,14 @@
         <span class="nav-logo-text">Open Data Designs</span>
       </a>
       <ul class="nav-links">
+        <li><a href="what-we-do.html">What We Do</a></li>
+        <li><a href="who-we-serve.html">Who We Serve</a></li>
+        <li><a href="how-we-work.html">How We Work</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="blog.html">Blog</a></li>
-        <li><a href="how-we-work.html">How We Work</a></li>
-        <li><a href="about.html">About</a></li>
         <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="about.html">About</a></li>
       </ul>
-      <a href="contact.html" class="btn btn-gold">Book a Conversation</a>
     </div>
   </div>
 </nav>
@@ -200,6 +211,19 @@
       Every engagement starts with a conversation. No sales pitch — just an honest discussion about
       where your data is, where it needs to go, and whether ODD is the right fit to help you get there.
     </p>
+  </div>
+</section>
+
+<!-- ── Schedule Callout ── -->
+<section class="schedule-callout">
+  <div class="container">
+    <div class="schedule-callout-inner">
+      <div>
+        <h2>Prefer to just pick a time?</h2>
+        <p>Skip the form — book 30 minutes directly on Darwin's calendar.</p>
+      </div>
+      <a href="schedule.html" class="btn btn-gold btn-lg">Book a Conversation →</a>
+    </div>
   </div>
 </section>
 
@@ -269,7 +293,7 @@
               <div class="expect-check">
                 <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
               </div>
-              A direct conversation with Darwin — not a sales team
+              A direct reply from Darwin — not a sales team
             </li>
             <li>
               <div class="expect-check">
@@ -281,7 +305,7 @@
               <div class="expect-check">
                 <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
               </div>
-              No commitment required to have the conversation
+              No commitment required to reach out
             </li>
           </ul>
         </div>
@@ -289,10 +313,10 @@
 
       <!-- Right: form -->
       <div class="contact-form-card">
-        <h2>Book a Conversation</h2>
+        <h2>Send a Message</h2>
         <p>
-          Tell us a bit about your organization and what you're working on.
-          We'll follow up to schedule a call.
+          Have a question before you book, or something you'd rather explain in writing first?
+          Tell us what's on your mind and Darwin will reply directly.
         </p>
 
         <form action="mailto:info@opendatadesigns.com" method="post" enctype="text/plain">
@@ -330,20 +354,21 @@
           </div>
 
           <div class="form-group">
-            <label for="interest">What are you working on?</label>
+            <label for="interest">What's this about?</label>
             <select id="interest" name="interest">
               <option value="" disabled selected>Select the closest match</option>
               <option>Data Management & Reporting Assessment</option>
               <option>Process & Systems Optimization</option>
               <option>Enterprise Data Warehouse / Snowflake</option>
               <option>AI-Augmented Engineering Practice</option>
+              <option>Just have a question</option>
               <option>Something else</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label for="message">What's the problem you're trying to solve?</label>
-            <textarea id="message" name="message" placeholder="A brief description of the challenge — the more specific, the better."></textarea>
+            <label for="message">What would you like to know?</label>
+            <textarea id="message" name="message" placeholder="A brief description of your question or challenge — the more specific, the better."></textarea>
           </div>
 
           <div class="form-submit">
@@ -401,6 +426,7 @@
         <h4>Company</h4>
         <ul>
           <li><a href="about.html">About Darwin Fisk</a></li>
+          <li><a href="who-we-serve.html">Who We Serve</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="how-we-work.html">How We Work</a></li>
           <li><a href="contact.html">Contact</a></li>

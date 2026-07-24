@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schedule a Conversation — Open Data Designs</title>
+  <meta name="description" content="Book a 30-minute conversation with Darwin Fisk directly. Pick a time that works — no forms, no sales team.">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://opendatadesigns.com/schedule.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="logo.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Schedule a Conversation — Open Data Designs">
+  <meta property="og:description" content="Book a 30-minute conversation with Darwin Fisk directly. Pick a time that works — no forms, no sales team.">
+  <meta property="og:url" content="https://opendatadesigns.com/schedule.html">
+  <meta property="og:site_name" content="Open Data Designs">
+  <meta property="og:image" content="https://opendatadesigns.com/logo.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Schedule a Conversation — Open Data Designs">
+  <meta name="twitter:description" content="Book a 30-minute conversation with Darwin Fisk directly.">
+  <meta name="twitter:image" content="https://opendatadesigns.com/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue:       #002366;
+      --blue-light: #e8f0fe;
+      --gold:       #FFD700;
+      --white:      #ffffff;
+      --gray-50:    #f8fafc;
+      --gray-200:   #e2e8f0;
+      --gray-300:   #cbd5e1;
+      --gray-500:   #64748b;
+      --gray-700:   #334155;
+      --gray-900:   #0f172a;
+      --radius:     12px;
+      --shadow:     0 4px 24px rgba(0,35,102,.10);
+      --shadow-lg:  0 8px 40px rgba(0,35,102,.18);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; color: var(--gray-900); background: var(--white); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+    /* ── Buttons ── */
+    .btn { display: inline-block; padding: .65rem 1.3rem; border-radius: 9px; font-weight: 600; font-size: .9rem; border: 2px solid transparent; cursor: pointer; transition: transform .15s, box-shadow .15s, background .15s, color .15s; white-space: nowrap; }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 18px rgba(0,0,0,.18); }
+    .btn-lg { padding: .85rem 1.75rem; font-size: 1rem; border-radius: 10px; }
+    .btn-gold { background: var(--gold); color: var(--blue); border-color: var(--gold); }
+    .btn-outline-blue { background: transparent; color: var(--blue); border-color: var(--blue); }
+    .btn-outline-blue:hover { background: var(--blue); color: var(--white); }
+
+    /* ── Nav ── */
+    nav { position: sticky; top: 0; z-index: 100; background: var(--blue); border-bottom: 2px solid rgba(255,215,0,.2); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 24px; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .nav-logo img { height: 40px; width: 40px; }
+    .nav-logo-text { color: var(--white); font-weight: 700; font-size: 1.05rem; letter-spacing: -.01em; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.78); font-size: .9rem; font-weight: 500; transition: color .15s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+    /* ── Page hero ── */
+    .page-hero { background: var(--blue); padding: 64px 0 48px; text-align: center; }
+    .page-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .page-hero h1 { font-size: 2.6rem; font-weight: 800; color: var(--white); letter-spacing: -.03em; line-height: 1.15; margin-bottom: 16px; }
+    .page-hero-sub { font-size: 1.05rem; color: rgba(255,255,255,.72); line-height: 1.7; max-width: 560px; margin: 0 auto; }
+
+    /* ── Scheduler ── */
+    .scheduler-section { padding: 56px 0 88px; background: var(--gray-50); }
+    .scheduler-card {
+      max-width: 560px; margin: 0 auto; text-align: center;
+      background: var(--white); border: 1px solid var(--gray-200); border-radius: 20px;
+      box-shadow: var(--shadow-lg); padding: 56px 48px;
+    }
+    .scheduler-card h2 { font-size: 1.4rem; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; letter-spacing: -.01em; }
+    .scheduler-card p { font-size: .95rem; color: var(--gray-500); line-height: 1.65; margin-bottom: 28px; }
+    .scheduler-steps { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 32px; text-align: left; }
+    .scheduler-steps li { display: flex; gap: 12px; align-items: flex-start; font-size: .88rem; color: var(--gray-700); }
+    .scheduler-step-num {
+      width: 20px; height: 20px; min-width: 20px; border-radius: 50%;
+      background: var(--blue-light); color: var(--blue); font-size: .72rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; margin-top: 1px;
+    }
+
+    /* ── Footer ── */
+    footer { background: var(--gray-900); padding: 60px 0 32px; }
+    .footer-inner { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 32px; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-brand img { height: 36px; width: 36px; }
+    .footer-brand-name { color: var(--white); font-weight: 700; font-size: .95rem; }
+    .footer-tagline { font-size: .85rem; color: rgba(255,255,255,.4); line-height: 1.6; max-width: 210px; }
+    .footer-col h4 { color: rgba(255,255,255,.45); font-size: .72rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { color: rgba(255,255,255,.6); font-size: .88rem; transition: color .15s; }
+    .footer-col ul a:hover { color: var(--gold); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .footer-copy, .footer-location { font-size: .82rem; color: rgba(255,255,255,.3); }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .page-hero h1 { font-size: 2.1rem; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      .page-hero { padding: 48px 0 40px; }
+      .page-hero h1 { font-size: 1.8rem; }
+      .nav-links { display: none; }
+      .scheduler-card { padding: 40px 28px; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.png" alt="Open Data Designs">
+        <span class="nav-logo-text">Open Data Designs</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="what-we-do.html">What We Do</a></li>
+        <li><a href="who-we-serve.html">Who We Serve</a></li>
+        <li><a href="how-we-work.html">How We Work</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Page Hero ── -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-eyebrow">Schedule a Conversation</div>
+    <h1>Pick a time that works for you.</h1>
+    <p class="page-hero-sub">
+      30 minutes with Darwin directly — no forms, no sales team, just a conversation about your data.
+    </p>
+  </div>
+</section>
+
+<!-- ── Scheduler ── -->
+<section class="scheduler-section">
+  <div class="container">
+    <div class="scheduler-card">
+      <h2>Open the scheduler</h2>
+      <p>Opens in a new tab. Pick a time, and you'll get a calendar invite with a Teams link automatically.</p>
+      <a href="https://outlook.office.com/book/OpenDataDesigns@opendatadesigns.com/" target="_blank" rel="noopener" class="btn btn-gold btn-lg" style="background:var(--blue);color:var(--white);border-color:var(--blue);">Open Scheduler →</a>
+      <ul class="scheduler-steps">
+        <li><span class="scheduler-step-num">1</span>Pick a 30-minute slot that fits your calendar.</li>
+        <li><span class="scheduler-step-num">2</span>Add your name, email, and a quick note on what you're working on.</li>
+        <li><span class="scheduler-step-num">3</span>You'll get a confirmation with a Teams meeting link — no account or sign-in required.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">
+          <img src="logo.png" alt="Open Data Designs">
+          <span class="footer-brand-name">Open Data Designs</span>
+        </div>
+        <p class="footer-tagline">Trusted Data. Confident Decisions.<br>Phoenix, AZ — serving clients nationally.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Data Foundation Assessment</a></li>
+          <li><a href="services.html">Reporting Modernization</a></li>
+          <li><a href="services.html">Process Optimization</a></li>
+          <li><a href="services.html">Enterprise Data Enablement</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Darwin Fisk</a></li>
+          <li><a href="who-we-serve.html">Who We Serve</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="how-we-work.html">How We Work</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:info@opendatadesigns.com">info@opendatadesigns.com</a></li>
+          <li><a href="tel:6027345615">602-734-5615</a></li>
+          <li><a href="https://www.linkedin.com/in/darwinfisk" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Open Data Designs, LLC. All rights reserved.</span>
+      <span class="footer-location">Phoenix, AZ</span>
+    </div>
+  </div>
+</footer>
+
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e7a9b28f81774c11a4910bfdda95dd01"}'></script>
+</body>
+</html>
