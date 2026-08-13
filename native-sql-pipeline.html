@@ -225,9 +225,8 @@
     <h1>Cost-Effective Data Management:<br>A Native SQL Approach</h1>
     <div class="article-byline"><strong>Darwin Fisk</strong> &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; 10 min read</div>
     <p class="article-pull">
-      The tool tax is optional. The skill is not. If your organization is on AWS, Azure, or Google Cloud,
-      you probably already have the foundation for a governed data pipeline — in the native language
-      every data platform has spoken for forty years.
+      The tool tax is optional. The skill is not. You probably already have the on-ramp to a governed
+      data pipeline — in the native language every data platform has spoken for forty years.
     </p>
   </div>
 </section>
@@ -241,10 +240,18 @@
 
         <p>
           The conversation usually starts the same way. A mid-market company — fifty to five hundred
-          employees, somewhere between gut-feel decisions and a real data practice — has decided it needs
-          a data warehouse. They've done some research. They've heard about dbt. They've looked at Fivetran
-          pricing. Someone on the team went to a conference and came back with a slide deck about the
-          modern data stack.
+          employees, somewhere between gut-feel decisions and a real data practice — is feeling the pain
+          before they know what to call it. Two departments show up to the same meeting with different
+          numbers for the same metric. Someone is still stitching reports together by hand every Monday.
+          The one person who understands how the spreadsheets connect is on vacation, and everything
+          downstream of them stalls. Leadership wants a dashboard they can trust and nobody can build one
+          because there's no single source of truth to point it at.
+        </p>
+
+        <p>
+          Eventually someone names the problem: they need a data warehouse. That's usually where the
+          research starts — dbt, Fivetran pricing, a slide deck about the modern data stack from someone
+          who went to a conference.
         </p>
 
         <p>
@@ -253,8 +260,8 @@
 
         <div class="article-pullquote">
           <p>
-            My answer surprises them: less than you think, if you build it the right way. More than you can
-            afford, if you build it the way the vendors want you to.
+            My answer surprises them: less than you think, if you build it with a Native SQL approach.
+            More than you can afford, if you build it the way the vendors want you to.
           </p>
         </div>
 
@@ -273,10 +280,12 @@
 
         <p>
           dbt takes YAML configuration and Jinja-templated SQL and compiles it into SQL that runs against
-          your warehouse. The output is SQL. Fivetran replicates your source data into landing tables and
-          uses SQL to load it. Spark DataFrames compile to a query plan that the execution engine runs as
-          distributed SQL. Airflow orchestrates jobs — and most of those jobs, at the end of the chain,
-          run SQL.
+          your warehouse. The output is SQL. Fivetran replicates your source data into landing tables,
+          then writes and merges it into the destination using that destination's own SQL. Spark
+          DataFrames compile to a logical plan that the Catalyst optimizer turns into a physical execution
+          plan — the same plan a Spark SQL query would produce, and when the source is a SQL engine, Spark
+          pushes the work down as SQL. Airflow orchestrates jobs — and in a data warehousing context, most
+          of those jobs, at the end of the chain, run SQL.
         </p>
 
         <p>
@@ -297,17 +306,17 @@
           need to deliver something that works, it frequently doesn't.
         </p>
 
-        <h2 id="what-you-have">What You Already Have</h2>
+        <h2 id="what-you-have">What the Warehouse Already Gives You</h2>
 
         <p>
-          If your organization is on AWS, Azure, or Google Cloud — and most mid-market companies are —
-          you already have access to a capable data warehouse. Redshift, Azure Synapse, BigQuery. It may
-          already be in your cloud contract. If not, it's a line item, not a platform decision. And once
-          you have it, you have a pipeline engine.
+          Most mid-market companies either already have a data warehouse — Redshift, Azure Synapse,
+          BigQuery, Snowflake, or one of the other platforms built to run on top of a major cloud — or are
+          one line item away from one, not one platform decision away. Whichever you land on, the
+          warehouse itself is doing more work than people give it credit for.
         </p>
 
         <p>
-          You have stored procedures. A stored procedure is a pipeline step. It accepts parameters,
+          A stored procedure is a pipeline step. It accepts parameters,
           executes logic, and returns a result. It can read from one table, transform the data, and write
           to another. It can log what it did, handle exceptions, and report success or failure. It is, in
           every functional sense, what a pipeline step is — written in the native language of the system
@@ -315,26 +324,29 @@
         </p>
 
         <p>
-          You have scheduled tasks. Snowflake Tasks, BigQuery Scheduled Queries, Redshift Scheduled
-          Queries — your warehouse can run a stored procedure, or any SQL statement, on a schedule you
-          define. That is an orchestrator. A simple one, but for most mid-market use cases, a sufficient one.
+          Scheduled tasks are an orchestrator. Snowflake Tasks, BigQuery Scheduled Queries, Redshift
+          Scheduled Queries, SQL Server Agent jobs — the warehouse can run a stored procedure, or any SQL
+          statement, on a schedule you define. A simple orchestrator, but for most mid-market use cases, a
+          sufficient one.
         </p>
 
         <p>
-          You have views. A view is a transformation layer. It presents data in a shape the consumer needs
+          Views are a transformation layer. A view presents data in a shape the consumer needs
           without moving or copying it. Materialized views take that further — they persist the result and
           refresh it on a schedule.
         </p>
 
         <p>
-          You have stages and COPY INTO. Snowflake's native file staging and bulk load mechanism is as
-          capable as most ETL tools for moving data from files into tables. No third-party connector required.
+          Native file staging and bulk load is an ingestion mechanism. Snowflake's stages and COPY INTO,
+          and the equivalent bulk-load tooling on the other major warehouses, are as capable as most ETL
+          tools for moving data from files into tables. No third-party connector required.
         </p>
 
         <div class="article-pullquote">
           <p>
-            Put these together and you have: ingestion, transformation, orchestration, and serving — in
-            native SQL, on infrastructure you're already paying for.
+            Put these together and the warehouse alone gives you: ingestion, transformation, orchestration,
+            and serving — in native SQL, on infrastructure you're already paying for once you've made the
+            warehouse decision.
           </p>
         </div>
 
@@ -553,8 +565,9 @@
         </p>
 
         <p>
-          You probably already have the platform. A cloud warehouse you're already paying for runs SQL.
-          SQL can build a staged, transformed, governed data warehouse. A practitioner who understands
+          You probably already have the on-ramp to the platform. You likely have a preferred cloud
+          services vendor, and standing up a warehouse on it is a line item, not a platform decision. SQL
+          can build a staged, transformed, governed data warehouse. A practitioner who understands
           data modeling and SQL can build it, document it, and hand it off in a way your team can maintain.
         </p>
 
@@ -613,7 +626,7 @@
           <h4>In this article</h4>
           <ul class="toc-list">
             <li><a href="#sql-generator">Every Tool Is a SQL Generator</a></li>
-            <li><a href="#what-you-have">What You Already Have</a></li>
+            <li><a href="#what-you-have">What the Warehouse Gives You</a></li>
             <li><a href="#choosing-stack">Choosing Your Stack</a></li>
             <li><a href="#architecture">What It Actually Looks Like</a></li>
             <li><a href="#skills">The Skills Argument</a></li>
